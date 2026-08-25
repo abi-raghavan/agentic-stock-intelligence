@@ -54,15 +54,18 @@ async def startup() -> None:
         except Exception as exc:
             logger.warning("startup_bm25_seed_failed", error=str(exc))
 
-        async def index_vectors() -> None:
-            loop = asyncio.get_running_loop()
-            try:
-                await loop.run_in_executor(None, lambda: retriever.qdrant.upsert_documents(retriever.records))
-                logger.info("startup_vector_seed_complete", documents=len(retriever.records))
-            except Exception as exc:
-                logger.warning("startup_vector_seed_failed", error=str(exc))
+        if settings.enable_qdrant:
+            async def index_vectors() -> None:
+                loop = asyncio.get_running_loop()
+                try:
+                    await loop.run_in_executor(None, lambda: retriever.qdrant.upsert_documents(retriever.records))
+                    logger.info("startup_vector_seed_complete", documents=len(retriever.records))
+                except Exception as exc:
+                    logger.warning("startup_vector_seed_failed", error=str(exc))
 
-        asyncio.create_task(index_vectors())
+            asyncio.create_task(index_vectors())
+        else:
+            logger.info("qdrant_disabled", mode="bm25_only")
 
 
 @app.get("/health")

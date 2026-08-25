@@ -70,7 +70,7 @@ class QdrantStore:
             )
 
     def upsert_documents(self, records: list[DocumentRecord]) -> None:
-        if not records:
+        if not settings.enable_qdrant or not records:
             return
         try:
             vectors = EmbeddingService.embed([f"{r.title}\n{r.content}" for r in records])
@@ -104,6 +104,8 @@ class QdrantStore:
         source_type: str | None = None,
         limit: int = 10,
     ) -> list[dict[str, Any]]:
+        if not settings.enable_qdrant:
+            return []
         try:
             vector = EmbeddingService.embed([query])[0]
             must: list[qmodels.FieldCondition] = []

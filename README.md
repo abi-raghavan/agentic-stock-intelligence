@@ -75,20 +75,46 @@ flowchart LR
     Agents --> Citations[CitationTracking]
 ```
 
-### Run with Docker (recommended)
+### Run without Docker (recommended for company laptops)
+
+No Docker, Qdrant, or Ollama required. Uses **BM25 RAG + live Yahoo/Google data**.
+
+**Prerequisites:** Python 3.12, Node 20, network access for live data APIs.
 
 ```bash
 git clone https://github.com/abi-raghavan/agentic-stock-intelligence.git
 cd agentic-stock-intelligence
-cp .env.example .env
-make deploy
+make local-setup
 ```
 
-Or manually:
+**Terminal 1 — API:**
+```bash
+make local-api
+```
+
+**Terminal 2 — Web UI:**
+```bash
+make local-web
+```
+
+Open **http://localhost:3000** and run the NVDA demo query.
+
+| Component | Local mode |
+|---|---|
+| Live news/market | Yes (yfinance + Google RSS) |
+| RAG retrieval | BM25 + seeded corpus + live headlines |
+| LLM planner | Built-in fallback (no Ollama) |
+| Vector search | Disabled (set `ENABLE_QDRANT=true` if you have Qdrant elsewhere) |
+
+Copy `.env.local.example` → `.env` is done automatically by `make local-setup`.
+
+---
+
+### Run with Docker (optional)
 
 ```bash
-docker compose up --build -d
-docker compose exec ollama ollama pull llama3.2:3b
+cp .env.example .env
+make deploy
 ```
 
 Open:
@@ -109,16 +135,12 @@ See diagrams above for system, RAG, and agent workflow.
 
 ## Local Development
 
-Prerequisites: Python 3.12, Node 20, Docker (for Qdrant + Ollama optional)
+See **Run without Docker** above. Quick reference:
 
 ```bash
-python3.12 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env
-uvicorn apps.api.main:app --reload
-
-# separate terminal
-cd apps/web && npm install && npm run dev
+make local-setup   # once
+make local-api     # terminal 1
+make local-web     # terminal 2
 ```
 
 ## Evaluation

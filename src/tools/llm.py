@@ -13,6 +13,9 @@ settings = get_settings()
 
 
 async def call_ollama(prompt: str, system: str | None = None) -> str:
+    if not settings.enable_ollama:
+        return "{}"
+
     messages = []
     if system:
         messages.append({"role": "system", "content": system})
