@@ -38,7 +38,7 @@ export default function AnalyzePage() {
             <label className="mb-2 block text-sm">Stock / Ticker</label>
             <input
               className="input"
-              placeholder="Tata Motors, TATAMOTORS.NS, NVDA, Reliance"
+              placeholder="Company name or ticker — Tata Motors, RELIANCE.NS, NVDA"
               value={ticker}
               onChange={(e) => setTicker(e.target.value)}
             />
@@ -61,9 +61,10 @@ export default function AnalyzePage() {
       <aside className="card">
         <h2 className="text-lg font-medium">Examples</h2>
         <ul className="mt-4 space-y-2 text-sm text-[var(--muted)]">
-          <li>Tata Motors · Reliance · TCS · INFY</li>
-          <li>TATAMOTORS.NS · RELIANCE.NS (NSE)</li>
-          <li>NVDA · AAPL (US)</li>
+          <li>Company name: Tata Motors · Reliance · HDFC Bank · Sun Pharma · Larsen &amp; Toubro</li>
+          <li>NSE / BSE ticker: TATASTEEL.NS · RELIANCE.NS · INFY.NS</li>
+          <li>US: NVIDIA · AAPL · AMD · Netflix</li>
+          <li>Index: Nifty · Sensex</li>
         </ul>
       </aside>
     </div>
