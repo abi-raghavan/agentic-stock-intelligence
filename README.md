@@ -1,6 +1,6 @@
 # Agentic Stock Intelligence
 
-Multi-agent stock intelligence platform with live news, market data, and evidence-backed reports. **Not financial advice. Not price prediction.**
+Multi-agent stock intelligence for **Indian (NSE/BSE) and US markets**. Live news and market data. Enter a company name or ticker — e.g. `Tata Motors`, `TATAMOTORS.NS`, `NVDA`. **Not financial advice.**
 
 **Stack:** Next.js · FastAPI · LangGraph · BM25/hybrid RAG · SQLite
 
@@ -19,7 +19,7 @@ Terminal 2: `make local-web`
 
 Open http://localhost:3000
 
-**Demo query:** NVDA — *"Should I be worried about NVIDIA over the next 30 days?"*
+**Demo:** Tata Motors — *"Should I be worried about Tata Motors over the next 30 days?"*
 
 ## Docker (optional)
 

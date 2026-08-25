@@ -63,7 +63,11 @@ class StockIntelligenceGraph:
                     "message": "Collecting news, market, and fundamentals",
                 }
             )
-            research, chart = await run_research(state["ticker"])
+            research, chart = await run_research(
+                state["ticker"],
+                display_name=state.get("display_name"),
+                news_query=state.get("news_query"),
+            )
             await self._emit(
                 {
                     "run_id": state["run_id"],
@@ -134,6 +138,7 @@ class StockIntelligenceGraph:
                 risk=state["risk"],
                 evidence=state["rag"].evidence,
                 market_chart=state.get("market_chart", []),
+                display_name=state.get("display_name"),
             )
             retry = False
             if not report.verification_passed and not state.get("retry_rag"):
@@ -146,6 +151,7 @@ class StockIntelligenceGraph:
                     risk=state["risk"],
                     evidence=rag.evidence,
                     market_chart=state.get("market_chart", []),
+                    display_name=state.get("display_name"),
                 )
                 await self._emit(
                     {
@@ -190,11 +196,14 @@ class StockIntelligenceGraph:
 
         return graph.compile()
 
-    async def run(self, run_id: str, ticker: str, query: str, event_callback=None) -> GraphState:
+    async def run(self, run_id: str, ticker: str, query: str, event_callback=None, display_name: str | None = None, market: str | None = None, news_query: str | None = None) -> GraphState:
         self.event_callback = event_callback
         initial: GraphState = {
             "run_id": run_id,
             "ticker": ticker.upper(),
+            "display_name": display_name or ticker.upper(),
+            "market": market or "UNKNOWN",
+            "news_query": news_query or f"{display_name or ticker} stock",
             "query": query,
             "events": [],
             "retry_rag": False,

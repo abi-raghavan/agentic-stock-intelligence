@@ -69,12 +69,16 @@ def fetch_market_data(ticker: str) -> dict:
     try:
         import yfinance as yf
 
-        hist = yf.Ticker(ticker).history(period="1mo")
-        if hist.empty:
+        hist = yf.download(ticker, period="1mo", progress=False)
+        if hist is None or hist.empty:
             if settings.enable_live_data:
                 logger.warning("market_history_empty", ticker=ticker)
             return fallback if not settings.enable_live_data else {**fallback, "live": False}
 
+        # Flatten multi-index columns from yf.download
+        if hasattr(hist.columns, "levels") and len(hist.columns.levels) > 1:
+            hist = hist.copy()
+            hist.columns = hist.columns.get_level_values(0)
         first_close = float(hist["Close"].iloc[0])
         last_close = float(hist["Close"].iloc[-1])
         pct = ((last_close - first_close) / first_close) * 100 if first_close else 0.0
@@ -99,9 +103,9 @@ def fetch_market_data(ticker: str) -> dict:
         return fallback
 
 
-def fetch_news_signals(ticker: str) -> tuple[list[NewsSignal], list[NewsSignal]]:
+def fetch_news_signals(ticker: str, news_query: str | None = None) -> tuple[list[NewsSignal], list[NewsSignal]]:
     if settings.enable_live_data:
-        positive, negative = fetch_live_news(ticker)
+        positive, negative = fetch_live_news(ticker, news_query=news_query)
         if positive or negative:
             logger.info("live_news_fetched", ticker=ticker, positive=len(positive), negative=len(negative))
             return positive, negative

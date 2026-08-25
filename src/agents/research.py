@@ -4,8 +4,12 @@ from src.models.schemas import ResearchOutput
 from src.tools.market import fetch_fundamentals, fetch_market_data, fetch_news_signals
 
 
-async def run_research(ticker: str) -> tuple[ResearchOutput, list[dict]]:
-    positive, negative = fetch_news_signals(ticker)
+async def run_research(
+    ticker: str,
+    display_name: str | None = None,
+    news_query: str | None = None,
+) -> tuple[ResearchOutput, list[dict]]:
+    positive, negative = fetch_news_signals(ticker, news_query=news_query)
     fundamentals = fetch_fundamentals(ticker)
     market = fetch_market_data(ticker)
     research = ResearchOutput(

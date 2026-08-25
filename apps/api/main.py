@@ -24,6 +24,7 @@ from src.models.schemas import (
     RetrievedDocumentResponse,
 )
 from src.rag.retriever import HybridRetriever
+from src.tools.ticker_resolver import resolve_symbol
 
 settings = get_settings()
 configure_logging(settings.log_level)
@@ -90,7 +91,7 @@ def list_runs(db: Session = Depends(get_db)) -> list[AgentRunSummary]:
     ]
 
 
-async def _execute_run(run_id: str, ticker: str, query: str) -> None:
+async def _execute_run(run_id: str, ticker: str, query: str, resolved_display: str, resolved_market: str, resolved_news_query: str) -> None:
     started = datetime.utcnow()
     queue = run_events[run_id]
     db = SessionLocal()
@@ -103,7 +104,15 @@ async def _execute_run(run_id: str, ticker: str, query: str) -> None:
     db.commit()
 
     try:
-        state = await graph.run(run_id, ticker, query, event_callback=callback)
+        state = await graph.run(
+            run_id,
+            ticker,
+            query,
+            event_callback=callback,
+            display_name=resolved_display,
+            market=resolved_market,
+            news_query=resolved_news_query,
+        )
         for item in state["rag"].evidence:
             db.add(
                 RetrievedDocument(
@@ -148,12 +157,21 @@ async def _execute_run(run_id: str, ticker: str, query: str) -> None:
 
 @app.post("/analyze", response_model=AnalyzeResponse)
 async def analyze(request: AnalyzeRequest, background_tasks: BackgroundTasks, db: Session = Depends(get_db)) -> AnalyzeResponse:
-    run = AgentRun(ticker=request.ticker.upper(), query=request.question, status="pending")
+    resolved = resolve_symbol(request.ticker)
+    run = AgentRun(ticker=resolved.yfinance_symbol, query=request.question, status="pending")
     db.add(run)
     db.commit()
     db.refresh(run)
     run_events[run.id] = asyncio.Queue()
-    background_tasks.add_task(_execute_run, run.id, request.ticker, request.question)
+    background_tasks.add_task(
+        _execute_run,
+        run.id,
+        resolved.yfinance_symbol,
+        request.question,
+        resolved.display_name,
+        resolved.market,
+        resolved.news_query,
+    )
     return AnalyzeResponse(run_id=run.id, status="pending")
 
 

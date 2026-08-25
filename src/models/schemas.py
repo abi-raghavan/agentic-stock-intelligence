@@ -14,7 +14,7 @@ class ConfidenceLevel(str, Enum):
 
 
 class AnalyzeRequest(BaseModel):
-    ticker: str = Field(..., min_length=1, max_length=16)
+    ticker: str = Field(..., min_length=1, max_length=64, description="Ticker or company name, e.g. NVDA, TATAMOTORS.NS, Tata Motors")
     question: str = Field(..., min_length=3)
 
 

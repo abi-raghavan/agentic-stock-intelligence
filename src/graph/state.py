@@ -8,6 +8,9 @@ from src.models.schemas import PlannerOutput, RAGOutput, ReportOutput, ResearchO
 class GraphState(TypedDict, total=False):
     run_id: str
     ticker: str
+    display_name: str
+    market: str
+    news_query: str
     query: str
     planner: PlannerOutput
     research: ResearchOutput

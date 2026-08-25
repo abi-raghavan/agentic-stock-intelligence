@@ -6,8 +6,8 @@ import { startAnalysis } from "@/lib/api";
 
 export default function AnalyzePage() {
   const router = useRouter();
-  const [ticker, setTicker] = useState("NVDA");
-  const [question, setQuestion] = useState("Should I be worried about NVIDIA over the next 30 days?");
+  const [ticker, setTicker] = useState("Tata Motors");
+  const [question, setQuestion] = useState("Should I be worried about Tata Motors over the next 30 days?");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -30,14 +30,18 @@ export default function AnalyzePage() {
         <p className="text-sm uppercase tracking-widest text-[var(--muted)]">Analyze Stock</p>
         <h1 className="mt-2 text-3xl font-semibold">Evidence-backed intelligence reports</h1>
         <p className="mt-3 max-w-2xl text-[var(--muted)]">
-          Enter a ticker and question. The multi-agent system will plan research, retrieve evidence, assess risk,
-          verify claims, and generate a source-backed report.
+          Enter an Indian or US ticker, or company name. Live data from Yahoo Finance and Google News.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
           <div>
-            <label className="mb-2 block text-sm">Ticker</label>
-            <input className="input" value={ticker} onChange={(e) => setTicker(e.target.value.toUpperCase())} />
+            <label className="mb-2 block text-sm">Stock / Ticker</label>
+            <input
+              className="input"
+              placeholder="Tata Motors, TATAMOTORS.NS, NVDA, Reliance"
+              value={ticker}
+              onChange={(e) => setTicker(e.target.value)}
+            />
           </div>
           <div>
             <label className="mb-2 block text-sm">Question</label>
@@ -55,17 +59,11 @@ export default function AnalyzePage() {
       </section>
 
       <aside className="card">
-        <h2 className="text-lg font-medium">Demo query</h2>
-        <p className="mt-3 text-sm text-[var(--muted)]">
-          Try NVIDIA with a risk-focused question to watch planner, research, hybrid RAG retrieval, risk synthesis,
-          verification, and final report generation.
-        </p>
-        <ul className="mt-6 space-y-3 text-sm">
-          <li className="rounded-lg bg-white/5 p-3">Live news via Yahoo Finance + Google News RSS</li>
-          <li className="rounded-lg bg-white/5 p-3">Live market data and fundamentals via yfinance</li>
-          <li className="rounded-lg bg-white/5 p-3">Hybrid BM25 + vector retrieval with RRF fusion</li>
-          <li className="rounded-lg bg-white/5 p-3">Citation-tracked claims and verification loop</li>
-          <li className="rounded-lg bg-white/5 p-3">Human-in-the-loop approve / reject / re-run</li>
+        <h2 className="text-lg font-medium">Examples</h2>
+        <ul className="mt-4 space-y-2 text-sm text-[var(--muted)]">
+          <li>Tata Motors · Reliance · TCS · INFY</li>
+          <li>TATAMOTORS.NS · RELIANCE.NS (NSE)</li>
+          <li>NVDA · AAPL (US)</li>
         </ul>
       </aside>
     </div>

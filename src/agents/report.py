@@ -22,6 +22,7 @@ async def run_report_verify(
     risk: RiskOutput,
     evidence: list[EvidenceItem],
     market_chart: list[dict],
+    display_name: str | None = None,
 ) -> ReportOutput:
     bullish = [s.title for s in research.positive_signals] + [
         opp for opp in risk.key_opportunities if opp not in [s.title for s in research.positive_signals]
@@ -53,8 +54,9 @@ async def run_report_verify(
     verified_claims = verify_claims(claims, evidence_ids)
     verification_passed = all(claim.verified for claim in verified_claims if claim.citation_ids)
 
+    label = display_name or ticker.upper()
     summary_parts = [
-        f"This intelligence brief analyzes {ticker.upper()} in response to: {query}",
+        f"This intelligence brief analyzes {label} ({ticker.upper()}) in response to: {query}",
         f"Opportunity score {risk.opportunity_score}/10 vs risk score {risk.risk_score}/10.",
         f"Market trend is {research.trend}; volatility is {research.volatility}.",
     ]
@@ -72,7 +74,7 @@ async def run_report_verify(
         recommended_actions.insert(0, "Treat conclusions as preliminary; rerun analysis with expanded corpus.")
 
     return ReportOutput(
-        title=f"{ticker.upper()} Intelligence Report",
+        title=f"{label} Intelligence Report",
         outlook=_outlook(research, risk),
         executive_summary=" ".join(summary_parts),
         bullish_signals=bullish[:5],

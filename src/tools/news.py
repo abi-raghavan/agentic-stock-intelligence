@@ -116,9 +116,10 @@ def fetch_yfinance_news(ticker: str, limit: int = 8) -> list[NewsSignal]:
         return []
 
 
-def fetch_google_news_rss(ticker: str, limit: int = 8) -> list[NewsSignal]:
-    query = quote_plus(f"{ticker} stock")
-    url = f"https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en"
+def fetch_google_news_rss(ticker: str, limit: int = 8, query: str | None = None) -> list[NewsSignal]:
+    search = query or f"{ticker} stock"
+    encoded = quote_plus(search)
+    url = f"https://news.google.com/rss/search?q={encoded}&hl=en-IN&gl=IN&ceid=IN:en"
     try:
         response = httpx.get(url, timeout=15.0, follow_redirects=True)
         response.raise_for_status()
@@ -137,10 +138,10 @@ def fetch_google_news_rss(ticker: str, limit: int = 8) -> list[NewsSignal]:
         return []
 
 
-def fetch_live_news(ticker: str, limit: int = 10) -> tuple[list[NewsSignal], list[NewsSignal]]:
+def fetch_live_news(ticker: str, limit: int = 10, news_query: str | None = None) -> tuple[list[NewsSignal], list[NewsSignal]]:
     combined: list[NewsSignal] = []
     seen_titles: set[str] = set()
-    for signal in fetch_yfinance_news(ticker, limit=limit) + fetch_google_news_rss(ticker, limit=limit):
+    for signal in fetch_yfinance_news(ticker, limit=limit) + fetch_google_news_rss(ticker, limit=limit, query=news_query):
         key = signal.title.lower().strip()
         if key in seen_titles:
             continue

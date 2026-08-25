@@ -1,0 +1,34 @@
+{
+  "ticker": "TMPV.NS",
+  "company": "Tata Motors Passenger Vehicles Limited",
+  "documents": [
+    {
+      "title": "Tata Motors EV and JLR Performance",
+      "source": "Company Overview",
+      "source_type": "research",
+      "document_date": "2025-06-01",
+      "content": "Tata Motors remains a leading Indian automaker with growing electric vehicle portfolio and Jaguar Land Rover contributing to consolidated revenue. Investors monitor passenger vehicle market share, EV adoption rates, and JLR demand in Europe and China."
+    },
+    {
+      "title": "Commercial Vehicle Cycle Sensitivity",
+      "source": "Sector Note",
+      "source_type": "research",
+      "document_date": "2025-05-15",
+      "content": "Commercial vehicle volumes are cyclically tied to infrastructure spending, freight demand, and financing conditions in India. Slowdown in industrial activity can pressure near-term CV sales and margins."
+    },
+    {
+      "title": "Debt and JLR Cash Flow Watch",
+      "source": "Risk Summary",
+      "source_type": "sec_filing",
+      "document_date": "2025-03-20",
+      "content": "Consolidated leverage and JLR free cash flow remain key investor focus areas. Any deterioration in luxury demand or working capital build can affect deleveraging trajectory and capex plans."
+    },
+    {
+      "title": "India Auto Policy and EV Incentives",
+      "source": "Policy Brief",
+      "source_type": "news",
+      "document_date": "2025-07-01",
+      "content": "Government EV subsidies, PLI schemes, and state-level incentives support domestic EV production. Policy changes or subsidy tapering could affect Tata Motors EV pricing strategy and volume targets."
+    }
+  ]
+}
