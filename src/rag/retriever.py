@@ -6,9 +6,6 @@ from pathlib import Path
 from typing import Any
 
 from rank_bm25 import BM25Okapi
-from qdrant_client import QdrantClient
-from qdrant_client.http import models as qmodels
-from sentence_transformers import SentenceTransformer
 
 from src.config import get_settings
 from src.logging_config import get_logger
@@ -39,11 +36,13 @@ class DocumentRecord:
 
 
 class EmbeddingService:
-    _model: SentenceTransformer | None = None
+    _model = None
 
     @classmethod
-    def get_model(cls) -> SentenceTransformer:
+    def get_model(cls):
         if cls._model is None:
+            from sentence_transformers import SentenceTransformer
+
             cls._model = SentenceTransformer(settings.embedding_model)
         return cls._model
 
@@ -56,10 +55,16 @@ class EmbeddingService:
 
 class QdrantStore:
     def __init__(self) -> None:
-        self.client = QdrantClient(url=settings.qdrant_url)
+        self.client = None
         self.collection = settings.qdrant_collection
+        if settings.enable_qdrant:
+            from qdrant_client import QdrantClient
+
+            self.client = QdrantClient(url=settings.qdrant_url)
 
     def ensure_collection(self, vector_size: int) -> None:
+        from qdrant_client.http import models as qmodels
+
         collections = [c.name for c in self.client.get_collections().collections]
         if self.collection not in collections:
             self.client.create_collection(
@@ -70,6 +75,8 @@ class QdrantStore:
     def upsert_documents(self, records: list[DocumentRecord]) -> None:
         if not settings.enable_qdrant or not records:
             return
+        from qdrant_client.http import models as qmodels
+
         vectors = EmbeddingService.embed([f"{r.title}\n{r.content}" for r in records])
         self.ensure_collection(len(vectors[0]))
         points = []
@@ -99,8 +106,10 @@ class QdrantStore:
         source_type: str | None = None,
         limit: int = 10,
     ) -> list[dict[str, Any]]:
-        if not settings.enable_qdrant:
+        if not settings.enable_qdrant or self.client is None:
             return []
+        from qdrant_client.http import models as qmodels
+
         vector = EmbeddingService.embed([query])[0]
         must: list[qmodels.FieldCondition] = []
         if ticker:

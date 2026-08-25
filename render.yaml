@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: agentic-stock-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn apps.api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHONPATH
+        value: .
+      - key: ENABLE_LIVE_DATA
+        value: "true"
+      - key: ENABLE_QDRANT
+        value: "false"
+      - key: ENABLE_OLLAMA
+        value: "false"
+      - key: SEED_DATA_ON_STARTUP
+        value: "true"
+      - key: SAMPLE_DATA_DIR
+        value: sample_data
+      - key: DATABASE_URL
+        value: sqlite:////tmp/stock_intel.db
+      - key: CORS_ORIGINS
+        value: http://localhost:3000
+      - key: LOG_LEVEL
+        value: INFO
