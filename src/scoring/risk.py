@@ -1,4 +1,3 @@
-from __future__ import annotations
 
 from src.models.schemas import ConfidenceLevel, ResearchOutput, RiskCategoryScore, RiskOutput
 

@@ -1,4 +1,3 @@
-from __future__ import annotations
 
 from typing import Any
 
@@ -89,7 +88,7 @@ class StockIntelligenceGraph:
             )
             if settings.enable_live_data and state.get("research"):
                 signals = state["research"].positive_signals + state["research"].negative_signals
-                live_docs = news_to_rag_documents(state["ticker"], signals)
+                live_docs = news_to_rag_documents(signals)
                 self.retriever.ingest_runtime_documents(state["ticker"], live_docs)
             rag = await run_rag(self.retriever, state["query"], state["ticker"])
             await self._emit(

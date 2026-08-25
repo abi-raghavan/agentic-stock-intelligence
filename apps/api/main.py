@@ -1,6 +1,5 @@
-from __future__ import annotations
-
 import asyncio
+import json
 from collections import defaultdict
 from datetime import datetime
 from typing import Any
@@ -22,6 +21,7 @@ from src.models.schemas import (
     ReportDecisionRequest,
     ReportResponse,
     RetrievedDocumentResponse,
+    ReportOutput,
 )
 from src.rag.retriever import HybridRetriever
 from src.tools.ticker_resolver import resolve_symbol
@@ -42,31 +42,19 @@ app.add_middleware(
 retriever = HybridRetriever()
 graph = StockIntelligenceGraph(retriever)
 run_events: dict[str, asyncio.Queue] = defaultdict(asyncio.Queue)
-run_results: dict[str, dict[str, Any]] = {}
 
 
 @app.on_event("startup")
 async def startup() -> None:
     init_db()
     if settings.seed_data_on_startup:
-        try:
-            count = retriever.load_bm25_only(settings.sample_data_dir)
-            logger.info("startup_bm25_seed_complete", documents=count)
-        except Exception as exc:
-            logger.warning("startup_bm25_seed_failed", error=str(exc))
-
+        count = retriever.load_bm25_only(settings.sample_data_dir)
+        logger.info("startup_bm25_seed_complete", documents=count)
         if settings.enable_qdrant:
-            async def index_vectors() -> None:
-                loop = asyncio.get_running_loop()
-                try:
-                    await loop.run_in_executor(None, lambda: retriever.qdrant.upsert_documents(retriever.records))
-                    logger.info("startup_vector_seed_complete", documents=len(retriever.records))
-                except Exception as exc:
-                    logger.warning("startup_vector_seed_failed", error=str(exc))
-
-            asyncio.create_task(index_vectors())
-        else:
-            logger.info("qdrant_disabled", mode="bm25_only")
+            loop = asyncio.get_running_loop()
+            asyncio.create_task(
+                loop.run_in_executor(None, lambda: retriever.qdrant.upsert_documents(retriever.records))
+            )
 
 
 @app.get("/health")
@@ -91,7 +79,14 @@ def list_runs(db: Session = Depends(get_db)) -> list[AgentRunSummary]:
     ]
 
 
-async def _execute_run(run_id: str, ticker: str, query: str, resolved_display: str, resolved_market: str, resolved_news_query: str) -> None:
+async def _execute_run(
+    run_id: str,
+    ticker: str,
+    query: str,
+    resolved_display: str,
+    resolved_market: str,
+    resolved_news_query: str,
+) -> None:
     started = datetime.utcnow()
     queue = run_events[run_id]
     db = SessionLocal()
@@ -142,7 +137,6 @@ async def _execute_run(run_id: str, ticker: str, query: str, resolved_display: s
         run.completed_at = datetime.utcnow()
         run.latency_ms = int((run.completed_at - started).total_seconds() * 1000)
         db.commit()
-        run_results[run_id] = {"status": "completed", "report_id": run_id}
         await queue.put({"run_id": run_id, "step": "done", "status": "completed", "message": "Run finished"})
     except Exception as exc:
         logger.exception("run_failed", run_id=run_id, error=str(exc))
@@ -184,7 +178,7 @@ async def stream_run(run_id: str) -> EventSourceResponse:
         queue = run_events[run_id]
         while True:
             event = await queue.get()
-            yield {"event": "agent_step", "data": __import__("json").dumps(event, default=str)}
+            yield {"event": "agent_step", "data": json.dumps(event, default=str)}
             if event.get("step") in {"done", "error"}:
                 break
 
@@ -231,8 +225,6 @@ def get_report(run_id: str, db: Session = Depends(get_db)) -> ReportResponse:
     report = db.query(Report).filter(Report.run_id == run_id).first()
     if not report:
         raise HTTPException(status_code=404, detail="Report not found")
-    from src.models.schemas import ReportOutput
-
     return ReportResponse(
         id=report.id,
         run_id=report.run_id,
@@ -257,14 +249,7 @@ def report_decision(run_id: str, request: ReportDecisionRequest, db: Session = D
     elif request.action == "rerun":
         report.status = "rerun_requested"
 
-    db.add(
-        AuditLog(
-            run_id=run_id,
-            action=request.action,
-            actor=request.actor,
-            metadata_json={"notes": request.notes},
-        )
-    )
+    db.add(AuditLog(run_id=run_id, action=request.action, actor=request.actor, metadata_json={"notes": request.notes}))
     db.commit()
     return {"status": report.status}
 

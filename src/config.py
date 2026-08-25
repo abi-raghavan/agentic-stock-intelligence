@@ -16,8 +16,8 @@ class Settings(BaseSettings):
     api_port: int = 8000
     cors_origins: str = "http://localhost:3000"
     enable_live_data: bool = True
-    enable_qdrant: bool = True
-    enable_ollama: bool = True
+    enable_qdrant: bool = False
+    enable_ollama: bool = False
     seed_data_on_startup: bool = True
     log_level: str = "INFO"
     sample_data_dir: str = "sample_data"

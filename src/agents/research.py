@@ -1,4 +1,3 @@
-from __future__ import annotations
 
 from src.models.schemas import ResearchOutput
 from src.tools.market import fetch_fundamentals, fetch_market_data, fetch_news_signals

@@ -1,4 +1,3 @@
-from __future__ import annotations
 
 from src.models.schemas import EvidenceItem, RAGOutput
 from src.rag.retriever import HybridRetriever

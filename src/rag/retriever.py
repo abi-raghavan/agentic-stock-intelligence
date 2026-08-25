@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import hashlib
 import json
 import re
@@ -72,30 +70,27 @@ class QdrantStore:
     def upsert_documents(self, records: list[DocumentRecord]) -> None:
         if not settings.enable_qdrant or not records:
             return
-        try:
-            vectors = EmbeddingService.embed([f"{r.title}\n{r.content}" for r in records])
-            self.ensure_collection(len(vectors[0]))
-            points = []
-            for idx, (record, vector) in enumerate(zip(records, vectors, strict=True)):
-                points.append(
-                    qmodels.PointStruct(
-                        id=idx + 1,
-                        vector=vector,
-                        payload={
-                            "doc_id": record.doc_id,
-                            "ticker": record.ticker.upper(),
-                            "company": record.company,
-                            "source": record.source,
-                            "source_type": record.source_type,
-                            "document_date": record.document_date,
-                            "title": record.title,
-                            "content": record.content,
-                        },
-                    )
+        vectors = EmbeddingService.embed([f"{r.title}\n{r.content}" for r in records])
+        self.ensure_collection(len(vectors[0]))
+        points = []
+        for idx, (record, vector) in enumerate(zip(records, vectors, strict=True)):
+            points.append(
+                qmodels.PointStruct(
+                    id=idx + 1,
+                    vector=vector,
+                    payload={
+                        "doc_id": record.doc_id,
+                        "ticker": record.ticker.upper(),
+                        "company": record.company,
+                        "source": record.source,
+                        "source_type": record.source_type,
+                        "document_date": record.document_date,
+                        "title": record.title,
+                        "content": record.content,
+                    },
                 )
-            self.client.upsert(collection_name=self.collection, points=points)
-        except Exception as exc:
-            logger.warning("qdrant_upsert_failed", error=str(exc))
+            )
+        self.client.upsert(collection_name=self.collection, points=points)
 
     def vector_search(
         self,
@@ -106,40 +101,36 @@ class QdrantStore:
     ) -> list[dict[str, Any]]:
         if not settings.enable_qdrant:
             return []
-        try:
-            vector = EmbeddingService.embed([query])[0]
-            must: list[qmodels.FieldCondition] = []
-            if ticker:
-                must.append(qmodels.FieldCondition(key="ticker", match=qmodels.MatchValue(value=ticker.upper())))
-            if source_type:
-                must.append(qmodels.FieldCondition(key="source_type", match=qmodels.MatchValue(value=source_type)))
+        vector = EmbeddingService.embed([query])[0]
+        must: list[qmodels.FieldCondition] = []
+        if ticker:
+            must.append(qmodels.FieldCondition(key="ticker", match=qmodels.MatchValue(value=ticker.upper())))
+        if source_type:
+            must.append(qmodels.FieldCondition(key="source_type", match=qmodels.MatchValue(value=source_type)))
 
-            query_filter = qmodels.Filter(must=must) if must else None
-            results = self.client.search(
-                collection_name=self.collection,
-                query_vector=vector,
-                query_filter=query_filter,
-                limit=limit,
-                with_payload=True,
+        query_filter = qmodels.Filter(must=must) if must else None
+        results = self.client.search(
+            collection_name=self.collection,
+            query_vector=vector,
+            query_filter=query_filter,
+            limit=limit,
+            with_payload=True,
+        )
+        output = []
+        for hit in results:
+            payload = hit.payload or {}
+            output.append(
+                {
+                    "doc_id": payload.get("doc_id", str(hit.id)),
+                    "source": payload.get("source", "unknown"),
+                    "source_type": payload.get("source_type", "unknown"),
+                    "document_date": payload.get("document_date"),
+                    "snippet": (payload.get("content") or "")[:500],
+                    "title": payload.get("title", ""),
+                    "vector_score": float(hit.score),
+                }
             )
-            output = []
-            for hit in results:
-                payload = hit.payload or {}
-                output.append(
-                    {
-                        "doc_id": payload.get("doc_id", str(hit.id)),
-                        "source": payload.get("source", "unknown"),
-                        "source_type": payload.get("source_type", "unknown"),
-                        "document_date": payload.get("document_date"),
-                        "snippet": (payload.get("content") or "")[:500],
-                        "title": payload.get("title", ""),
-                        "vector_score": float(hit.score),
-                    }
-                )
-            return output
-        except Exception as exc:
-            logger.warning("qdrant_search_failed", error=str(exc))
-            return []
+        return output
 
 
 class BM25Index:
@@ -216,7 +207,7 @@ def rewrite_query(query: str, ticker: str) -> str:
     if "risk" in normalized.lower() or "worried" in normalized.lower():
         normalized += " risks regulatory export restrictions valuation volatility"
     elif "opportunity" in normalized.lower() or "bullish" in normalized.lower():
-        normalized += " growth earnings AI demand revenue guidance"
+        normalized += " growth earnings demand revenue guidance"
     return normalized
 
 
@@ -231,12 +222,6 @@ class HybridRetriever:
         self.qdrant = QdrantStore()
         self.bm25 = BM25Index()
         self.records: list[DocumentRecord] = []
-
-    def load_sample_data(self, data_dir: str | Path, sync_vectors: bool = False) -> int:
-        count = self.load_bm25_only(data_dir)
-        if sync_vectors:
-            self.qdrant.upsert_documents(self.records)
-        return count
 
     def load_bm25_only(self, data_dir: str | Path) -> int:
         path = Path(data_dir)
@@ -266,27 +251,22 @@ class HybridRetriever:
             return 0
         ticker = ticker.upper()
         base_records = [r for r in self.records if not (r.ticker == ticker and r.source_type == "live_news")]
-        live_records: list[DocumentRecord] = []
-        for idx, doc in enumerate(documents):
-            live_records.append(
-                DocumentRecord(
-                    doc_id=make_doc_id(ticker, doc.get("source", "live"), idx + 10_000),
-                    ticker=ticker,
-                    company=ticker,
-                    source=doc.get("source", "Live News"),
-                    source_type=doc.get("source_type", "live_news"),
-                    document_date=doc.get("document_date"),
-                    title=doc.get("title", "Live headline"),
-                    content=doc.get("content", ""),
-                )
+        live_records = [
+            DocumentRecord(
+                doc_id=make_doc_id(ticker, doc.get("source", "live"), idx + 10_000),
+                ticker=ticker,
+                company=ticker,
+                source=doc.get("source", "Live News"),
+                source_type=doc.get("source_type", "live_news"),
+                document_date=doc.get("document_date"),
+                title=doc.get("title", "Live headline"),
+                content=doc.get("content", ""),
             )
+            for idx, doc in enumerate(documents)
+        ]
         self.records = base_records + live_records
         self.bm25.build(self.records)
-        try:
-            self.qdrant.upsert_documents(live_records)
-        except Exception as exc:
-            logger.warning("live_vector_upsert_failed", error=str(exc))
-        logger.info("runtime_documents_ingested", ticker=ticker, count=len(live_records))
+        self.qdrant.upsert_documents(live_records)
         return len(live_records)
 
     def retrieve(
