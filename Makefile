@@ -1,4 +1,4 @@
-.PHONY: local local-api local-web up down logs test deploy
+.PHONY: local local-api local-web up down logs test deploy snapshots
 
 # --- No Docker (company laptop friendly) ---
 local-setup:
@@ -20,7 +20,12 @@ local:
 	@echo "Then visit http://localhost:3000"
 
 test:
-	python3.12 -m pytest tests/test_rag.py tests/test_citations.py tests/test_report.py tests/test_graph.py -q
+	python3.12 -m pytest tests/ -q
+
+# Refresh the offline fallback snapshot. Run from a non-datacenter connection,
+# since Yahoo Finance rate limits cloud IPs.
+snapshots:
+	. .venv/bin/activate && PYTHONPATH=. python scripts/refresh_snapshots.py
 
 # --- Docker (optional) ---
 up:

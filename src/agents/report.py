@@ -3,6 +3,13 @@ from src.models.schemas import CitedClaim, ConfidenceLevel, EvidenceItem, Report
 from src.rag.citations import build_sources_list, verify_claims
 
 
+def _confidence(research: ResearchOutput, risk: RiskOutput) -> ConfidenceLevel:
+    # Cached or missing inputs cannot support a high-confidence conclusion.
+    if research.degraded_sources and risk.confidence == ConfidenceLevel.HIGH:
+        return ConfidenceLevel.MEDIUM
+    return risk.confidence
+
+
 def _outlook(research: ResearchOutput, risk: RiskOutput) -> str:
     if risk.opportunity_score - risk.risk_score >= 2:
         return "Moderately Bullish"
@@ -44,6 +51,8 @@ async def run_report_verify(
         f"Trend {research.trend}, volatility {research.volatility}. "
         f"{len(evidence)} evidence documents cited."
     )
+    if research.degraded_sources:
+        summary += f" Data provenance caveat: {', '.join(research.degraded_sources)}."
 
     return ReportOutput(
         title=f"{label} Intelligence Report",
@@ -53,7 +62,7 @@ async def run_report_verify(
         bearish_signals=list(dict.fromkeys(bearish))[:5],
         opportunity_score=risk.opportunity_score,
         risk_score=risk.risk_score,
-        confidence=risk.confidence,
+        confidence=_confidence(research, risk),
         top_evidence=evidence[:5],
         recommended_actions=[
             "Review cited evidence before any investment decision.",

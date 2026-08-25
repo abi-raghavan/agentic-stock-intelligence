@@ -7,7 +7,10 @@ import feedparser
 import httpx
 import yfinance as yf
 
+from src.logging_config import get_logger
 from src.models.schemas import NewsSignal
+
+logger = get_logger(__name__)
 
 NEGATIVE_KEYWORDS = (
     "decline", "drop", "fall", "loss", "miss", "cut", "layoff", "lawsuit",
@@ -84,10 +87,23 @@ def fetch_google_news_rss(ticker: str, limit: int = 8, query: str | None = None)
     return signals
 
 
+def _best_effort(source: str, fetch, **kwargs) -> list[NewsSignal]:
+    try:
+        return fetch(**kwargs)
+    except Exception as exc:
+        logger.warning("news_source_unavailable", source=source, error=str(exc))
+        return []
+
+
 def fetch_live_news(ticker: str, limit: int = 10, news_query: str | None = None) -> tuple[list[NewsSignal], list[NewsSignal]]:
+    # Yahoo's news endpoint needs a cookie/crumb handshake that gets rate limited
+    # hard from datacenter IPs, so neither feed is treated as required.
+    yahoo = _best_effort("yfinance", fetch_yfinance_news, ticker=ticker, limit=limit)
+    google = _best_effort("google_news_rss", fetch_google_news_rss, ticker=ticker, limit=limit, query=news_query)
+
     combined: list[NewsSignal] = []
     seen: set[str] = set()
-    for signal in fetch_yfinance_news(ticker, limit=limit) + fetch_google_news_rss(ticker, limit=limit, query=news_query):
+    for signal in yahoo + google:
         key = signal.title.lower().strip()
         if key in seen:
             continue

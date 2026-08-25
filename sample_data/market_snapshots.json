@@ -1,0 +1,1406 @@
+{
+  "as_of": "2026-08-25",
+  "snapshots": {
+    "TMPV.NS": {
+      "chart": [
+        {
+          "date": "2026-07-27",
+          "close": 327.65
+        },
+        {
+          "date": "2026-07-28",
+          "close": 324.4
+        },
+        {
+          "date": "2026-07-29",
+          "close": 329.8
+        },
+        {
+          "date": "2026-07-30",
+          "close": 334.2
+        },
+        {
+          "date": "2026-07-31",
+          "close": 339.75
+        },
+        {
+          "date": "2026-08-03",
+          "close": 349.3
+        },
+        {
+          "date": "2026-08-04",
+          "close": 348.55
+        },
+        {
+          "date": "2026-08-05",
+          "close": 349.8
+        },
+        {
+          "date": "2026-08-06",
+          "close": 345.35
+        },
+        {
+          "date": "2026-08-07",
+          "close": 347.0
+        },
+        {
+          "date": "2026-08-10",
+          "close": 347.1
+        },
+        {
+          "date": "2026-08-11",
+          "close": 347.6
+        },
+        {
+          "date": "2026-08-12",
+          "close": 343.0
+        },
+        {
+          "date": "2026-08-13",
+          "close": 349.6
+        },
+        {
+          "date": "2026-08-14",
+          "close": 334.5
+        },
+        {
+          "date": "2026-08-17",
+          "close": 330.2
+        },
+        {
+          "date": "2026-08-18",
+          "close": 322.8
+        },
+        {
+          "date": "2026-08-19",
+          "close": 321.3
+        },
+        {
+          "date": "2026-08-20",
+          "close": 320.25
+        },
+        {
+          "date": "2026-08-21",
+          "close": 317.9
+        },
+        {
+          "date": "2026-08-24",
+          "close": 314.4
+        },
+        {
+          "date": "2026-08-25",
+          "close": 314.25
+        }
+      ],
+      "volume_trend": "above_average",
+      "fundamentals": {
+        "revenueGrowth": -0.082,
+        "profitMargins": 0.22814,
+        "earningsGrowth": -0.803,
+        "recommendationKey": "hold"
+      },
+      "news": [
+        {
+          "title": "Tata Motors Passenger Vehicles partners with Tata Communications for 5G integration - scanx.trade",
+          "summary": "Tata Motors Passenger Vehicles partners with Tata Communications for 5G integration&nbsp;&nbsp;scanx.trade",
+          "sentiment": "neutral",
+          "source": "scanx.trade",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "India's Tata Motors PV shares fall after profit plunges, warns on margins - Reuters",
+          "summary": "India's Tata Motors PV shares fall after profit plunges, warns on margins&nbsp;&nbsp;Reuters",
+          "sentiment": "neutral",
+          "source": "Reuters",
+          "date": "2026-08-14"
+        },
+        {
+          "title": "Tata Communications, Tata Motors partner to launch 5G-powered Sierra.ev - Business Standard",
+          "summary": "Tata Communications, Tata Motors partner to launch 5G-powered Sierra.ev&nbsp;&nbsp;Business Standard",
+          "sentiment": "neutral",
+          "source": "Business Standard",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "Tata Motors PV Announces \u20b925,000 Price Hike - Sahi",
+          "summary": "Tata Motors PV Announces \u20b925,000 Price Hike&nbsp;&nbsp;Sahi",
+          "sentiment": "neutral",
+          "source": "Sahi",
+          "date": "2026-08-21"
+        },
+        {
+          "title": "Tata Motors PV: Margin Pressures May Dampen Strong Volume Growth - Rediff",
+          "summary": "Tata Motors PV: Margin Pressures May Dampen Strong Volume Growth&nbsp;&nbsp;Rediff",
+          "sentiment": "positive",
+          "source": "Rediff",
+          "date": "2026-08-22"
+        },
+        {
+          "title": "Tata Motors Passenger Vehicles Shares Fall 2.17%; Stock Part of Nifty 50 - Moneycontrol.com",
+          "summary": "Tata Motors Passenger Vehicles Shares Fall 2.17%; Stock Part of Nifty 50&nbsp;&nbsp;Moneycontrol.com",
+          "sentiment": "negative",
+          "source": "Moneycontrol.com",
+          "date": "2026-08-12"
+        },
+        {
+          "title": "Tata Motors PV Q1 FY27 results: Net profit declines 80%; JLR revenue drops to \u00a36.0 billion YoY - Upstox",
+          "summary": "Tata Motors PV Q1 FY27 results: Net profit declines 80%; JLR revenue drops to \u00a36.0 billion YoY&nbsp;&nbsp;Upstox",
+          "sentiment": "negative",
+          "source": "Upstox",
+          "date": "2026-08-13"
+        },
+        {
+          "title": "Why Tata Motors Passenger Vehicles Share Price Is Rising - Equitymaster",
+          "summary": "Why Tata Motors Passenger Vehicles Share Price Is Rising&nbsp;&nbsp;Equitymaster",
+          "sentiment": "neutral",
+          "source": "Equitymaster",
+          "date": "2026-08-03"
+        }
+      ]
+    },
+    "TMCV.NS": {
+      "chart": [
+        {
+          "date": "2026-07-27",
+          "close": 411.1
+        },
+        {
+          "date": "2026-07-28",
+          "close": 416.7
+        },
+        {
+          "date": "2026-07-29",
+          "close": 411.4
+        },
+        {
+          "date": "2026-07-30",
+          "close": 414.95
+        },
+        {
+          "date": "2026-07-31",
+          "close": 436.8
+        },
+        {
+          "date": "2026-08-03",
+          "close": 452.5
+        },
+        {
+          "date": "2026-08-04",
+          "close": 446.75
+        },
+        {
+          "date": "2026-08-05",
+          "close": 450.2
+        },
+        {
+          "date": "2026-08-06",
+          "close": 459.65
+        },
+        {
+          "date": "2026-08-07",
+          "close": 453.1
+        },
+        {
+          "date": "2026-08-10",
+          "close": 450.2
+        },
+        {
+          "date": "2026-08-11",
+          "close": 450.05
+        },
+        {
+          "date": "2026-08-12",
+          "close": 457.05
+        },
+        {
+          "date": "2026-08-13",
+          "close": 474.8
+        },
+        {
+          "date": "2026-08-14",
+          "close": 474.3
+        },
+        {
+          "date": "2026-08-17",
+          "close": 470.4
+        },
+        {
+          "date": "2026-08-18",
+          "close": 471.65
+        },
+        {
+          "date": "2026-08-19",
+          "close": 478.3
+        },
+        {
+          "date": "2026-08-20",
+          "close": 477.6
+        },
+        {
+          "date": "2026-08-21",
+          "close": 472.55
+        },
+        {
+          "date": "2026-08-24",
+          "close": 475.05
+        },
+        {
+          "date": "2026-08-25",
+          "close": 474.9
+        }
+      ],
+      "volume_trend": "normal",
+      "fundamentals": {
+        "revenueGrowth": 0.193,
+        "profitMargins": 0.04809,
+        "earningsGrowth": 0.834,
+        "recommendationKey": "strong_buy"
+      },
+      "news": [
+        {
+          "title": "Tata Motors stock rebounds 22% from June low, nears record high - Business Standard",
+          "summary": "Tata Motors stock rebounds 22% from June low, nears record high&nbsp;&nbsp;Business Standard",
+          "sentiment": "positive",
+          "source": "Business Standard",
+          "date": "2026-08-20"
+        },
+        {
+          "title": "Tata Motors Reports 28% YoY Growth in Commercial Vehicle Sales for April 2026 - scanx.trade",
+          "summary": "Tata Motors Reports 28% YoY Growth in Commercial Vehicle Sales for April 2026&nbsp;&nbsp;scanx.trade",
+          "sentiment": "positive",
+          "source": "scanx.trade",
+          "date": "2026-08-23"
+        },
+        {
+          "title": "Tata Motors CV Q1 results: Net profit rises 83% to Rs 2,560 crore - Moneycontrol.com",
+          "summary": "Tata Motors CV Q1 results: Net profit rises 83% to Rs 2,560 crore&nbsp;&nbsp;Moneycontrol.com",
+          "sentiment": "positive",
+          "source": "Moneycontrol.com",
+          "date": "2026-08-12"
+        },
+        {
+          "title": "Tata Motors CV shares trade lower ahead of Q1 FY27 results: 5 things investors need to know - Upstox",
+          "summary": "Tata Motors CV shares trade lower ahead of Q1 FY27 results: 5 things investors need to know&nbsp;&nbsp;Upstox",
+          "sentiment": "neutral",
+          "source": "Upstox",
+          "date": "2026-08-11"
+        },
+        {
+          "title": "Tata Motors Q1 Results: Net profit surges 83% YoY to \u20b92,560 crore, revenue improves 20% - Livemint",
+          "summary": "Tata Motors Q1 Results: Net profit surges 83% YoY to \u20b92,560 crore, revenue improves 20%&nbsp;&nbsp;Livemint",
+          "sentiment": "positive",
+          "source": "Livemint",
+          "date": "2026-08-12"
+        },
+        {
+          "title": "Tata Motors July Commercial Vehicle Sales Jump 37%; Shares Climb Over 3% - HDFC Sky",
+          "summary": "Tata Motors July Commercial Vehicle Sales Jump 37%; Shares Climb Over 3%&nbsp;&nbsp;HDFC Sky",
+          "sentiment": "neutral",
+          "source": "HDFC Sky",
+          "date": "2026-08-03"
+        },
+        {
+          "title": "Tata Motors Passenger Vehicles vs Tata Motors Commercial Vehicles: Comparison - Univest",
+          "summary": "Tata Motors Passenger Vehicles vs Tata Motors Commercial Vehicles: Comparison&nbsp;&nbsp;Univest",
+          "sentiment": "neutral",
+          "source": "Univest",
+          "date": "2026-07-28"
+        },
+        {
+          "title": "Tata Motors CV Jumps 3% As Q1 Beat, Upbeat FY27 Outlook Cheer Street - outlookbusiness.com",
+          "summary": "Tata Motors CV Jumps 3% As Q1 Beat, Upbeat FY27 Outlook Cheer Street&nbsp;&nbsp;outlookbusiness.com",
+          "sentiment": "positive",
+          "source": "outlookbusiness.com",
+          "date": "2026-08-13"
+        }
+      ]
+    },
+    "RELIANCE.NS": {
+      "chart": [
+        {
+          "date": "2026-07-27",
+          "close": 1280.0
+        },
+        {
+          "date": "2026-07-28",
+          "close": 1267.7
+        },
+        {
+          "date": "2026-07-29",
+          "close": 1275.9
+        },
+        {
+          "date": "2026-07-30",
+          "close": 1292.9
+        },
+        {
+          "date": "2026-07-31",
+          "close": 1307.8
+        },
+        {
+          "date": "2026-08-03",
+          "close": 1319.0
+        },
+        {
+          "date": "2026-08-04",
+          "close": 1290.9
+        },
+        {
+          "date": "2026-08-05",
+          "close": 1280.0
+        },
+        {
+          "date": "2026-08-06",
+          "close": 1325.0
+        },
+        {
+          "date": "2026-08-07",
+          "close": 1334.8
+        },
+        {
+          "date": "2026-08-10",
+          "close": 1327.3
+        },
+        {
+          "date": "2026-08-11",
+          "close": 1323.9
+        },
+        {
+          "date": "2026-08-12",
+          "close": 1329.0
+        },
+        {
+          "date": "2026-08-13",
+          "close": 1317.0
+        },
+        {
+          "date": "2026-08-14",
+          "close": 1310.0
+        },
+        {
+          "date": "2026-08-17",
+          "close": 1316.0
+        },
+        {
+          "date": "2026-08-18",
+          "close": 1322.0
+        },
+        {
+          "date": "2026-08-19",
+          "close": 1311.0
+        },
+        {
+          "date": "2026-08-20",
+          "close": 1313.2
+        },
+        {
+          "date": "2026-08-21",
+          "close": 1316.0
+        },
+        {
+          "date": "2026-08-24",
+          "close": 1309.8
+        },
+        {
+          "date": "2026-08-25",
+          "close": 1317.0
+        }
+      ],
+      "volume_trend": "normal",
+      "fundamentals": {
+        "revenueGrowth": 0.297,
+        "profitMargins": 0.066149995,
+        "earningsGrowth": -0.224,
+        "recommendationKey": "strong_buy"
+      },
+      "news": [
+        {
+          "title": "Reliance Industries Share Price Rallies 3%: What's Driving the Stock Higher? - India Infoline",
+          "summary": "Reliance Industries Share Price Rallies 3%: What's Driving the Stock Higher?&nbsp;&nbsp;India Infoline",
+          "sentiment": "neutral",
+          "source": "India Infoline",
+          "date": "2026-08-06"
+        },
+        {
+          "title": "Reliance Industries Share Price Prediction for Tomorrow: Levels for Monday 24 August 2026 - Univest",
+          "summary": "Reliance Industries Share Price Prediction for Tomorrow: Levels for Monday 24 August 2026&nbsp;&nbsp;Univest",
+          "sentiment": "neutral",
+          "source": "Univest",
+          "date": "2026-08-23"
+        },
+        {
+          "title": "Stocks to Watch for August 24: Reliance Industries, NATCO Pharma, Bank of Baroda - CNBC TV18",
+          "summary": "Stocks to Watch for August 24: Reliance Industries, NATCO Pharma, Bank of Baroda&nbsp;&nbsp;CNBC TV18",
+          "sentiment": "neutral",
+          "source": "CNBC TV18",
+          "date": "2026-08-23"
+        },
+        {
+          "title": "Stocks to watch: Reliance Industries, Power Grid, IREDA among shares to be in focus today. Details here - Livemint",
+          "summary": "Stocks to watch: Reliance Industries, Power Grid, IREDA among shares to be in focus today. Details here&nbsp;&nbsp;Livemint",
+          "sentiment": "neutral",
+          "source": "Livemint",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "Stock markets edged higher in early trade amid lower crude oil prices, buying in Reliance Industries - The Hindu",
+          "summary": "Stock markets edged higher in early trade amid lower crude oil prices, buying in Reliance Industries&nbsp;&nbsp;The Hindu",
+          "sentiment": "neutral",
+          "source": "The Hindu",
+          "date": "2026-08-06"
+        },
+        {
+          "title": "Reliance Industries shares rise 3.5% on crossing key technical indicator, multiple block deals - Moneycontrol.com",
+          "summary": "Reliance Industries shares rise 3.5% on crossing key technical indicator, multiple block deals&nbsp;&nbsp;Moneycontrol.com",
+          "sentiment": "positive",
+          "source": "Moneycontrol.com",
+          "date": "2026-08-06"
+        },
+        {
+          "title": "Reliance Stock And 2 Indian Energy Names Facing Margin Pressure - simplywall.st",
+          "summary": "Reliance Stock And 2 Indian Energy Names Facing Margin Pressure&nbsp;&nbsp;simplywall.st",
+          "sentiment": "neutral",
+          "source": "simplywall.st",
+          "date": "2026-08-03"
+        },
+        {
+          "title": "Stocks in news: Reliance Industries, Bank of Baroda, Power Grid, NATCO Pharma and JSW Infra - The Economic Times",
+          "summary": "Stocks in news: Reliance Industries, Bank of Baroda, Power Grid, NATCO Pharma and JSW Infra&nbsp;&nbsp;The Economic Times",
+          "sentiment": "neutral",
+          "source": "The Economic Times",
+          "date": "2026-08-24"
+        }
+      ]
+    },
+    "TCS.NS": {
+      "chart": [
+        {
+          "date": "2026-07-27",
+          "close": 2295.6
+        },
+        {
+          "date": "2026-07-28",
+          "close": 2398.0
+        },
+        {
+          "date": "2026-07-29",
+          "close": 2446.6
+        },
+        {
+          "date": "2026-07-30",
+          "close": 2431.8
+        },
+        {
+          "date": "2026-07-31",
+          "close": 2365.6
+        },
+        {
+          "date": "2026-08-03",
+          "close": 2473.7
+        },
+        {
+          "date": "2026-08-04",
+          "close": 2460.0
+        },
+        {
+          "date": "2026-08-05",
+          "close": 2413.0
+        },
+        {
+          "date": "2026-08-06",
+          "close": 2373.0
+        },
+        {
+          "date": "2026-08-07",
+          "close": 2452.7
+        },
+        {
+          "date": "2026-08-10",
+          "close": 2425.7
+        },
+        {
+          "date": "2026-08-11",
+          "close": 2445.7
+        },
+        {
+          "date": "2026-08-12",
+          "close": 2349.7
+        },
+        {
+          "date": "2026-08-13",
+          "close": 2375.0
+        },
+        {
+          "date": "2026-08-14",
+          "close": 2361.0
+        },
+        {
+          "date": "2026-08-17",
+          "close": 2313.2
+        },
+        {
+          "date": "2026-08-18",
+          "close": 2280.0
+        },
+        {
+          "date": "2026-08-19",
+          "close": 2289.0
+        },
+        {
+          "date": "2026-08-20",
+          "close": 2298.0
+        },
+        {
+          "date": "2026-08-21",
+          "close": 2302.0
+        },
+        {
+          "date": "2026-08-24",
+          "close": 2284.1
+        },
+        {
+          "date": "2026-08-25",
+          "close": 2296.2
+        }
+      ],
+      "volume_trend": "normal",
+      "fundamentals": {
+        "revenueGrowth": 0.139,
+        "profitMargins": 0.18052,
+        "earningsGrowth": 0.046,
+        "recommendationKey": "buy"
+      },
+      "news": [
+        {
+          "title": "TCS stock falls after MHP acquisition: Brokerages bearish; Citi, HSBC flag integration risks, falling... - Moneycontrol.com",
+          "summary": "TCS stock falls after MHP acquisition: Brokerages bearish; Citi, HSBC flag integration risks, falling...&nbsp;&nbsp;Moneycontrol.com",
+          "sentiment": "negative",
+          "source": "Moneycontrol.com",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "Tata Consultancy Services Stock And 2 Income Compounders For Steady Dividends - simplywall.st",
+          "summary": "Tata Consultancy Services Stock And 2 Income Compounders For Steady Dividends&nbsp;&nbsp;simplywall.st",
+          "sentiment": "neutral",
+          "source": "simplywall.st",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "Stocks to watch, August 25: Sugar stocks, TCS, Hindustan Copper, Ceigall India, Meesho, Lenskart, Brigade Hotel - Upstox",
+          "summary": "Stocks to watch, August 25: Sugar stocks, TCS, Hindustan Copper, Ceigall India, Meesho, Lenskart, Brigade Hotel&nbsp;&nbsp;Upstox",
+          "sentiment": "neutral",
+          "source": "Upstox",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "TCS shareholders stare at Rs 3.4 lakh crore loss YTD, dividend payouts fall 12.7%\u2014Should you buy, sell or hold? - Zee Business",
+          "summary": "TCS shareholders stare at Rs 3.4 lakh crore loss YTD, dividend payouts fall 12.7%\u2014Should you buy, sell or hold?&nbsp;&nbsp;Zee Business",
+          "sentiment": "negative",
+          "source": "Zee Business",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "TCS-MHP deal: Kotak sees potential to unlock value under select scenarios - CNBC TV18",
+          "summary": "TCS-MHP deal: Kotak sees potential to unlock value under select scenarios&nbsp;&nbsp;CNBC TV18",
+          "sentiment": "neutral",
+          "source": "CNBC TV18",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "TCS share price target: Porsche\u2019s IT consulting arm buyout EPS neutral, win-win deal - Business Today",
+          "summary": "TCS share price target: Porsche\u2019s IT consulting arm buyout EPS neutral, win-win deal&nbsp;&nbsp;Business Today",
+          "sentiment": "neutral",
+          "source": "Business Today",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "TCS shares trade lower as IT firm seeks to acquire 100% stake in Porsche-arm MHP for \u20ac320 million; key things to know - Upstox",
+          "summary": "TCS shares trade lower as IT firm seeks to acquire 100% stake in Porsche-arm MHP for \u20ac320 million; key things to know&nbsp;&nbsp;Upstox",
+          "sentiment": "neutral",
+          "source": "Upstox",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "Porsche inks $1.5 billion deal for AI deployment with India\u2019s largest IT services firm Tata Consultancy - CNBC",
+          "summary": "Porsche inks $1.5 billion deal for AI deployment with India\u2019s largest IT services firm Tata Consultancy&nbsp;&nbsp;CNBC",
+          "sentiment": "neutral",
+          "source": "CNBC",
+          "date": "2026-08-25"
+        }
+      ]
+    },
+    "INFY.NS": {
+      "chart": [
+        {
+          "date": "2026-07-27",
+          "close": 1079.2
+        },
+        {
+          "date": "2026-07-28",
+          "close": 1105.7
+        },
+        {
+          "date": "2026-07-29",
+          "close": 1155.6
+        },
+        {
+          "date": "2026-07-30",
+          "close": 1155.1
+        },
+        {
+          "date": "2026-07-31",
+          "close": 1130.1
+        },
+        {
+          "date": "2026-08-03",
+          "close": 1180.0
+        },
+        {
+          "date": "2026-08-04",
+          "close": 1167.5
+        },
+        {
+          "date": "2026-08-05",
+          "close": 1174.0
+        },
+        {
+          "date": "2026-08-06",
+          "close": 1165.0
+        },
+        {
+          "date": "2026-08-07",
+          "close": 1175.1
+        },
+        {
+          "date": "2026-08-10",
+          "close": 1183.0
+        },
+        {
+          "date": "2026-08-11",
+          "close": 1190.7
+        },
+        {
+          "date": "2026-08-12",
+          "close": 1176.1
+        },
+        {
+          "date": "2026-08-13",
+          "close": 1175.0
+        },
+        {
+          "date": "2026-08-14",
+          "close": 1169.2
+        },
+        {
+          "date": "2026-08-17",
+          "close": 1139.9
+        },
+        {
+          "date": "2026-08-18",
+          "close": 1115.0
+        },
+        {
+          "date": "2026-08-19",
+          "close": 1119.8
+        },
+        {
+          "date": "2026-08-20",
+          "close": 1130.0
+        },
+        {
+          "date": "2026-08-21",
+          "close": 1121.0
+        },
+        {
+          "date": "2026-08-24",
+          "close": 1130.0
+        },
+        {
+          "date": "2026-08-25",
+          "close": 1144.0
+        }
+      ],
+      "volume_trend": "normal",
+      "fundamentals": {
+        "revenueGrowth": 0.029,
+        "profitMargins": 0.16370001,
+        "earningsGrowth": 0.053,
+        "recommendationKey": "buy"
+      },
+      "news": [
+        {
+          "title": "Infosys hosts investor meetings in Mumbai and virtual session - scanx.trade",
+          "summary": "Infosys hosts investor meetings in Mumbai and virtual session&nbsp;&nbsp;scanx.trade",
+          "sentiment": "neutral",
+          "source": "scanx.trade",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "TCS, Infosys, Wipro, HCLTech, TechM, Sonata Software, R Systems shares: Check ratings, outlook - Business Today",
+          "summary": "TCS, Infosys, Wipro, HCLTech, TechM, Sonata Software, R Systems shares: Check ratings, outlook&nbsp;&nbsp;Business Today",
+          "sentiment": "neutral",
+          "source": "Business Today",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "H-1B Visa Fee Proposal: Infosys, TCS, other IT stocks in focus - CNBC TV18",
+          "summary": "H-1B Visa Fee Proposal: Infosys, TCS, other IT stocks in focus&nbsp;&nbsp;CNBC TV18",
+          "sentiment": "neutral",
+          "source": "CNBC TV18",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "Why are IT stocks down today? TCS, Infosys and LTM face broker downgrades - BusinessLine",
+          "summary": "Why are IT stocks down today? TCS, Infosys and LTM face broker downgrades&nbsp;&nbsp;BusinessLine",
+          "sentiment": "negative",
+          "source": "BusinessLine",
+          "date": "2026-08-21"
+        },
+        {
+          "title": "Stock Markets Today: Sensex, Nifty Ride on Blue-chip Stocks - Rediff",
+          "summary": "Stock Markets Today: Sensex, Nifty Ride on Blue-chip Stocks&nbsp;&nbsp;Rediff",
+          "sentiment": "neutral",
+          "source": "Rediff",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "Infosys shares fall 2.04% to Rs 1,116.60 - TradingView",
+          "summary": "Infosys shares fall 2.04% to Rs 1,116.60&nbsp;&nbsp;TradingView",
+          "sentiment": "negative",
+          "source": "TradingView",
+          "date": "2026-08-17"
+        },
+        {
+          "title": "FTSE Rejig: Groww, Meesho Among 10 Stocks To Draw Inflows On Likely Inclusion; Biocon To Exit \u2014 Full List - NDTV Profit",
+          "summary": "FTSE Rejig: Groww, Meesho Among 10 Stocks To Draw Inflows On Likely Inclusion; Biocon To Exit \u2014 Full List&nbsp;&nbsp;NDTV Profit",
+          "sentiment": "positive",
+          "source": "NDTV Profit",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "Infosys shares jump 11% in three-day rally amid anti-AI play; should you buy, sell or hold? - Moneycontrol.com",
+          "summary": "Infosys shares jump 11% in three-day rally amid anti-AI play; should you buy, sell or hold?&nbsp;&nbsp;Moneycontrol.com",
+          "sentiment": "neutral",
+          "source": "Moneycontrol.com",
+          "date": "2026-07-29"
+        }
+      ]
+    },
+    "HDFCBANK.NS": {
+      "chart": [
+        {
+          "date": "2026-07-27",
+          "close": 739.55
+        },
+        {
+          "date": "2026-07-28",
+          "close": 735.4
+        },
+        {
+          "date": "2026-07-29",
+          "close": 748.2
+        },
+        {
+          "date": "2026-07-30",
+          "close": 753.95
+        },
+        {
+          "date": "2026-07-31",
+          "close": 748.15
+        },
+        {
+          "date": "2026-08-03",
+          "close": 753.0
+        },
+        {
+          "date": "2026-08-04",
+          "close": 742.0
+        },
+        {
+          "date": "2026-08-05",
+          "close": 735.0
+        },
+        {
+          "date": "2026-08-06",
+          "close": 734.3
+        },
+        {
+          "date": "2026-08-07",
+          "close": 731.0
+        },
+        {
+          "date": "2026-08-10",
+          "close": 731.0
+        },
+        {
+          "date": "2026-08-11",
+          "close": 729.0
+        },
+        {
+          "date": "2026-08-12",
+          "close": 729.0
+        },
+        {
+          "date": "2026-08-13",
+          "close": 725.0
+        },
+        {
+          "date": "2026-08-14",
+          "close": 727.0
+        },
+        {
+          "date": "2026-08-17",
+          "close": 729.0
+        },
+        {
+          "date": "2026-08-18",
+          "close": 723.0
+        },
+        {
+          "date": "2026-08-19",
+          "close": 720.0
+        },
+        {
+          "date": "2026-08-20",
+          "close": 725.05
+        },
+        {
+          "date": "2026-08-21",
+          "close": 726.95
+        },
+        {
+          "date": "2026-08-24",
+          "close": 729.0
+        },
+        {
+          "date": "2026-08-25",
+          "close": 727.5
+        }
+      ],
+      "volume_trend": "normal",
+      "fundamentals": {
+        "revenueGrowth": 0.166,
+        "profitMargins": 0.26787,
+        "earningsGrowth": 0.181,
+        "recommendationKey": "strong_buy"
+      },
+      "news": [
+        {
+          "title": "Why HDFC Bank shares falling today? Key factors to watch - BusinessLine",
+          "summary": "Why HDFC Bank shares falling today? Key factors to watch&nbsp;&nbsp;BusinessLine",
+          "sentiment": "negative",
+          "source": "BusinessLine",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "HDFC Bank, TCS, Asian Paints among 7 NIFTY50 stocks with negative return in last five years - Upstox",
+          "summary": "HDFC Bank, TCS, Asian Paints among 7 NIFTY50 stocks with negative return in last five years&nbsp;&nbsp;Upstox",
+          "sentiment": "neutral",
+          "source": "Upstox",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "HDFC Bank: Why the stock can\u2019t catch a break Just ~5% return for investors in 5 years, versus nearly 55% for the Nifty. Profits are still growing, but slower. NIMs and return ratios have fallen, CASA has weakened, governance overhangs persist and ICICI Bank - LinkedIn",
+          "summary": "HDFC Bank: Why the stock can\u2019t catch a break Just ~5% return for investors in 5 years, versus nearly 55% for the Nifty. Profits are still growing, but slower. NIMs and return ratios have fallen, CASA has weakened, governance overhangs persist and ICICI Bank&nbsp;&nbsp;LinkedIn",
+          "sentiment": "neutral",
+          "source": "LinkedIn",
+          "date": "2026-08-03"
+        },
+        {
+          "title": "HDFC Bank shares: JM Financial cuts target price to Rs 800, maintains 'ADD' - Business Today",
+          "summary": "HDFC Bank shares: JM Financial cuts target price to Rs 800, maintains 'ADD'&nbsp;&nbsp;Business Today",
+          "sentiment": "negative",
+          "source": "Business Today",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "HDFC Bank stock rises 1% after RBI allows LIC to raise stake to 9.99% - Moneycontrol.com",
+          "summary": "HDFC Bank stock rises 1% after RBI allows LIC to raise stake to 9.99%&nbsp;&nbsp;Moneycontrol.com",
+          "sentiment": "positive",
+          "source": "Moneycontrol.com",
+          "date": "2026-08-20"
+        },
+        {
+          "title": "HDFC Bank Share Price Prediction for Monday 24 Aug 2026 - Univest",
+          "summary": "HDFC Bank Share Price Prediction for Monday 24 Aug 2026&nbsp;&nbsp;Univest",
+          "sentiment": "neutral",
+          "source": "Univest",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "RBI allows LIC to increase holding in HDFC Bank from 4.11% to 9.99% - The Hindu",
+          "summary": "RBI allows LIC to increase holding in HDFC Bank from 4.11% to 9.99%&nbsp;&nbsp;The Hindu",
+          "sentiment": "neutral",
+          "source": "The Hindu",
+          "date": "2026-08-20"
+        },
+        {
+          "title": "Buy, Sell Or Hold: Vedanta, Hindustan Copper, HDFC Bank, Godrej Industries, Marksans Pharma \u2014 Ask Profit - NDTV Profit",
+          "summary": "Buy, Sell Or Hold: Vedanta, Hindustan Copper, HDFC Bank, Godrej Industries, Marksans Pharma \u2014 Ask Profit&nbsp;&nbsp;NDTV Profit",
+          "sentiment": "positive",
+          "source": "NDTV Profit",
+          "date": "2026-08-25"
+        }
+      ]
+    },
+    "NVDA": {
+      "chart": [
+        {
+          "date": "2026-07-27",
+          "close": 196.51
+        },
+        {
+          "date": "2026-07-28",
+          "close": 197.01
+        },
+        {
+          "date": "2026-07-29",
+          "close": 190.01
+        },
+        {
+          "date": "2026-07-30",
+          "close": 195.04
+        },
+        {
+          "date": "2026-07-31",
+          "close": 200.75
+        },
+        {
+          "date": "2026-08-03",
+          "close": 206.64
+        },
+        {
+          "date": "2026-08-04",
+          "close": 211.94
+        },
+        {
+          "date": "2026-08-05",
+          "close": 219.22
+        },
+        {
+          "date": "2026-08-06",
+          "close": 218.99
+        },
+        {
+          "date": "2026-08-07",
+          "close": 223.96
+        },
+        {
+          "date": "2026-08-10",
+          "close": 217.55
+        },
+        {
+          "date": "2026-08-11",
+          "close": 217.5
+        },
+        {
+          "date": "2026-08-12",
+          "close": 224.09
+        },
+        {
+          "date": "2026-08-13",
+          "close": 225.3
+        },
+        {
+          "date": "2026-08-14",
+          "close": 225.16
+        },
+        {
+          "date": "2026-08-17",
+          "close": 225.01
+        },
+        {
+          "date": "2026-08-18",
+          "close": 219.74
+        },
+        {
+          "date": "2026-08-19",
+          "close": 217.56
+        },
+        {
+          "date": "2026-08-20",
+          "close": 216.85
+        },
+        {
+          "date": "2026-08-21",
+          "close": 214.72
+        },
+        {
+          "date": "2026-08-24",
+          "close": 208.48
+        }
+      ],
+      "volume_trend": "above_average",
+      "fundamentals": {
+        "revenueGrowth": 0.852,
+        "profitMargins": 0.62966,
+        "earningsGrowth": 2.145,
+        "recommendationKey": "strong_buy"
+      },
+      "news": [
+        {
+          "title": "Nvidia shares set for $280 billion price swing after earnings, options show - Reuters",
+          "summary": "Nvidia shares set for $280 billion price swing after earnings, options show&nbsp;&nbsp;ReutersNvidia earnings face a frustrating reality&nbsp;&nbsp;Yahoo FinanceWatch Ives: Nvidia Earnings Could Be the Next Big Catalyst for AI Stocks&nbsp;&nbsp;Bloomberg",
+          "sentiment": "neutral",
+          "source": "Reuters",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "Stock Market Today: Dow Rises As Treasury Yields Fall; Nvidia, Micron, Sandisk Rally (Live Coverage) - Investor's Business Daily",
+          "summary": "Stock Market Today: Dow Rises As Treasury Yields Fall; Nvidia, Micron, Sandisk Rally (Live Coverage)&nbsp;&nbsp;Investor's Business Daily",
+          "sentiment": "neutral",
+          "source": "Investor's Business Daily",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "SpaceX Stock Rises as Nvidia Space Chip Paves Way for Musk\u2019s Orbital AI Ambitions - Barron's",
+          "summary": "SpaceX Stock Rises as Nvidia Space Chip Paves Way for Musk\u2019s Orbital AI Ambitions&nbsp;&nbsp;Barron's",
+          "sentiment": "positive",
+          "source": "Barron's",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "Nvidia stock is on a 7-day losing streak ahead of its big earnings report - Yahoo Finance",
+          "summary": "Nvidia stock is on a 7-day losing streak ahead of its big earnings report&nbsp;&nbsp;Yahoo Finance",
+          "sentiment": "neutral",
+          "source": "Yahoo Finance",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "U.S. stock futures rise as investors await Nvidia results, inflation data By Investing.com - Investing.com",
+          "summary": "U.S. stock futures rise as investors await Nvidia results, inflation data By Investing.com&nbsp;&nbsp;Investing.com",
+          "sentiment": "positive",
+          "source": "Investing.com",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "Stocks making the biggest moves midday: Expedia, Nvidia, Strategy, Hims & Hers and more - CNBC",
+          "summary": "Stocks making the biggest moves midday: Expedia, Nvidia, Strategy, Hims & Hers and more&nbsp;&nbsp;CNBC",
+          "sentiment": "neutral",
+          "source": "CNBC",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "Nvidia Scored an H200 Win in China, But These Analysts Warn It May Not Be a Reason to Buy NVDA Stock - Barchart.com",
+          "summary": "Nvidia Scored an H200 Win in China, But These Analysts Warn It May Not Be a Reason to Buy NVDA Stock&nbsp;&nbsp;Barchart.com",
+          "sentiment": "neutral",
+          "source": "Barchart.com",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "Is NVIDIA (NVDA) Undervalued Following Its Lancium AI Factory Collaboration? - simplywall.st",
+          "summary": "Is NVIDIA (NVDA) Undervalued Following Its Lancium AI Factory Collaboration?&nbsp;&nbsp;simplywall.st",
+          "sentiment": "neutral",
+          "source": "simplywall.st",
+          "date": "2026-08-25"
+        }
+      ]
+    },
+    "AAPL": {
+      "chart": [
+        {
+          "date": "2026-07-27",
+          "close": 336.62
+        },
+        {
+          "date": "2026-07-28",
+          "close": 339.79
+        },
+        {
+          "date": "2026-07-29",
+          "close": 337.9
+        },
+        {
+          "date": "2026-07-30",
+          "close": 333.14
+        },
+        {
+          "date": "2026-07-31",
+          "close": 308.64
+        },
+        {
+          "date": "2026-08-03",
+          "close": 303.16
+        },
+        {
+          "date": "2026-08-04",
+          "close": 309.11
+        },
+        {
+          "date": "2026-08-05",
+          "close": 310.73
+        },
+        {
+          "date": "2026-08-06",
+          "close": 312.14
+        },
+        {
+          "date": "2026-08-07",
+          "close": 313.06
+        },
+        {
+          "date": "2026-08-10",
+          "close": 308.26
+        },
+        {
+          "date": "2026-08-11",
+          "close": 304.91
+        },
+        {
+          "date": "2026-08-12",
+          "close": 302.25
+        },
+        {
+          "date": "2026-08-13",
+          "close": 305.26
+        },
+        {
+          "date": "2026-08-14",
+          "close": 305.93
+        },
+        {
+          "date": "2026-08-17",
+          "close": 305.59
+        },
+        {
+          "date": "2026-08-18",
+          "close": 310.03
+        },
+        {
+          "date": "2026-08-19",
+          "close": 316.83
+        },
+        {
+          "date": "2026-08-20",
+          "close": 311.3
+        },
+        {
+          "date": "2026-08-21",
+          "close": 309.35
+        },
+        {
+          "date": "2026-08-24",
+          "close": 310.34
+        }
+      ],
+      "volume_trend": "normal",
+      "fundamentals": {
+        "revenueGrowth": 0.164,
+        "profitMargins": 0.27618998,
+        "earningsGrowth": 0.287,
+        "recommendationKey": "buy"
+      },
+      "news": [
+        {
+          "title": "US Stocks: Starting with Apple\ud83d\udc4d - Moomoo",
+          "summary": "US Stocks: Starting with Apple\ud83d\udc4d&nbsp;&nbsp;Moomoo",
+          "sentiment": "neutral",
+          "source": "Moomoo",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "Apple Stock Outlook: AAPL CEO Transition, Foldable iPhone and EU Deal - FXLeaders",
+          "summary": "Apple Stock Outlook: AAPL CEO Transition, Foldable iPhone and EU Deal&nbsp;&nbsp;FXLeaders",
+          "sentiment": "neutral",
+          "source": "FXLeaders",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "Apple Just Became Wall Street\u2019s Favorite Mag 7 Stock for a Surprising Reason - Yahoo Finance",
+          "summary": "Apple Just Became Wall Street\u2019s Favorite Mag 7 Stock for a Surprising Reason&nbsp;&nbsp;Yahoo Finance",
+          "sentiment": "neutral",
+          "source": "Yahoo Finance",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "What's Going On With Apple Stock Monday? - TradingView",
+          "summary": "What's Going On With Apple Stock Monday?&nbsp;&nbsp;TradingView",
+          "sentiment": "neutral",
+          "source": "TradingView",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "Why is Apple stock rallying today? - Investing.com",
+          "summary": "Why is Apple stock rallying today?&nbsp;&nbsp;Investing.com",
+          "sentiment": "neutral",
+          "source": "Investing.com",
+          "date": "2026-08-19"
+        },
+        {
+          "title": "The Premium On AAPL Stock Vs What Its Peers Deliver - Trefis",
+          "summary": "The Premium On AAPL Stock Vs What Its Peers Deliver&nbsp;&nbsp;Trefis",
+          "sentiment": "neutral",
+          "source": "Trefis",
+          "date": "2026-08-21"
+        },
+        {
+          "title": "Apple Stock Got an Upgrade. It Could Be the AI Gatekeeper. - Barron's",
+          "summary": "Apple Stock Got an Upgrade. It Could Be the AI Gatekeeper.&nbsp;&nbsp;Barron's",
+          "sentiment": "positive",
+          "source": "Barron's",
+          "date": "2026-08-17"
+        },
+        {
+          "title": "Apple stock stands out among Magnificent Seven on low AI spending - qz.com",
+          "summary": "Apple stock stands out among Magnificent Seven on low AI spending&nbsp;&nbsp;qz.com",
+          "sentiment": "neutral",
+          "source": "qz.com",
+          "date": "2026-08-19"
+        }
+      ]
+    },
+    "MSFT": {
+      "chart": [
+        {
+          "date": "2026-07-27",
+          "close": 388.37
+        },
+        {
+          "date": "2026-07-28",
+          "close": 392.61
+        },
+        {
+          "date": "2026-07-29",
+          "close": 389.81
+        },
+        {
+          "date": "2026-07-30",
+          "close": 450.25
+        },
+        {
+          "date": "2026-07-31",
+          "close": 463.85
+        },
+        {
+          "date": "2026-08-03",
+          "close": 486.73
+        },
+        {
+          "date": "2026-08-04",
+          "close": 491.88
+        },
+        {
+          "date": "2026-08-05",
+          "close": 486.54
+        },
+        {
+          "date": "2026-08-06",
+          "close": 498.92
+        },
+        {
+          "date": "2026-08-07",
+          "close": 499.05
+        },
+        {
+          "date": "2026-08-10",
+          "close": 505.11
+        },
+        {
+          "date": "2026-08-11",
+          "close": 502.86
+        },
+        {
+          "date": "2026-08-12",
+          "close": 491.5
+        },
+        {
+          "date": "2026-08-13",
+          "close": 495.95
+        },
+        {
+          "date": "2026-08-14",
+          "close": 494.47
+        },
+        {
+          "date": "2026-08-17",
+          "close": 479.45
+        },
+        {
+          "date": "2026-08-18",
+          "close": 480.73
+        },
+        {
+          "date": "2026-08-19",
+          "close": 483.4
+        },
+        {
+          "date": "2026-08-20",
+          "close": 481.15
+        },
+        {
+          "date": "2026-08-21",
+          "close": 483.24
+        },
+        {
+          "date": "2026-08-24",
+          "close": 487.31
+        }
+      ],
+      "volume_trend": "normal",
+      "fundamentals": {
+        "revenueGrowth": 0.177,
+        "profitMargins": 0.40305,
+        "earningsGrowth": 0.317,
+        "recommendationKey": "strong_buy"
+      },
+      "news": [
+        {
+          "title": "Microsoft Stock in 2027: My Prediction Is That It Still Beats the Market - Yahoo Finance",
+          "summary": "Microsoft Stock in 2027: My Prediction Is That It Still Beats the Market&nbsp;&nbsp;Yahoo Finance",
+          "sentiment": "positive",
+          "source": "Yahoo Finance",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "Microsoft compensation data reveals salaries, bonuses and stock awards across key businesses - HR Katha",
+          "summary": "Microsoft compensation data reveals salaries, bonuses and stock awards across key businesses&nbsp;&nbsp;HR Katha",
+          "sentiment": "neutral",
+          "source": "HR Katha",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "Microsoft salary of over 600 employees for AI and cloud jobs leaked: Full list inside - India Today",
+          "summary": "Microsoft salary of over 600 employees for AI and cloud jobs leaked: Full list inside&nbsp;&nbsp;India Today",
+          "sentiment": "neutral",
+          "source": "India Today",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "Microsoft Stock\u2019s Upside Now Runs Through Its Data Center Build - Trefis",
+          "summary": "Microsoft Stock\u2019s Upside Now Runs Through Its Data Center Build&nbsp;&nbsp;Trefis",
+          "sentiment": "neutral",
+          "source": "Trefis",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "Microsoft Stock in 2027: My Prediction Is That It Still Beats the Market - The Motley Fool",
+          "summary": "Microsoft Stock in 2027: My Prediction Is That It Still Beats the Market&nbsp;&nbsp;The Motley Fool",
+          "sentiment": "positive",
+          "source": "The Motley Fool",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "Leaked Microsoft pay data shows how much hundreds of employees report making in AI, cloud, and other teams - Business Insider",
+          "summary": "Leaked Microsoft pay data shows how much hundreds of employees report making in AI, cloud, and other teams&nbsp;&nbsp;Business Insider",
+          "sentiment": "neutral",
+          "source": "Business Insider",
+          "date": "2026-08-24"
+        },
+        {
+          "title": "Microsoft stock advances as AI backlog fuels $678 billion order book - Ad-hoc-news.de",
+          "summary": "Microsoft stock advances as AI backlog fuels $678 billion order book&nbsp;&nbsp;Ad-hoc-news.de",
+          "sentiment": "neutral",
+          "source": "Ad-hoc-news.de",
+          "date": "2026-08-25"
+        },
+        {
+          "title": "Microsoft Stock Facing Margin Pressures - Forbes",
+          "summary": "Microsoft Stock Facing Margin Pressures&nbsp;&nbsp;Forbes",
+          "sentiment": "neutral",
+          "source": "Forbes",
+          "date": "2026-08-10"
+        }
+      ]
+    }
+  }
+}

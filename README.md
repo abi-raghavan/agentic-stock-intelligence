@@ -103,6 +103,24 @@ If the UI loads but Analyze fails, check:
 - `CORS_ORIGINS` matches Vercel exactly
 - Render logs for the failed request
 
+## Data sources and offline fallback
+
+Live data comes from Yahoo Finance (prices, fundamentals) and Google News RSS
+(headlines). Yahoo rate limits shared datacenter IPs, so a cloud-hosted instance
+will regularly get `YFRateLimitError`.
+
+Each source degrades independently rather than failing the run. When a live fetch
+is throttled, the platform falls back to a committed snapshot in
+`sample_data/market_snapshots.json`. Any cached input is labelled in the report's
+provenance caveat, and cached data caps confidence at medium so a conclusion is
+never presented as more certain than its evidence.
+
+Refresh the snapshot from a residential connection:
+
+```bash
+make snapshots
+```
+
 ## Tests
 
 ```bash

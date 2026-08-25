@@ -54,6 +54,7 @@ class ResearchOutput(BaseModel):
     volatility: Literal["low", "medium", "high"]
     price_change_pct: float | None = None
     volume_trend: str | None = None
+    degraded_sources: list[str] = Field(default_factory=list)
 
 
 class EvidenceItem(BaseModel):

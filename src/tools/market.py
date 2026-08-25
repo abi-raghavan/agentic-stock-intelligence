@@ -1,10 +1,26 @@
 import yfinance as yf
 
 from src.config import get_settings
+from src.logging_config import get_logger
 from src.models.schemas import NewsSignal
 from src.tools.news import fetch_live_news
+from src.tools.snapshots import (
+    snapshot_date,
+    snapshot_fundamentals,
+    snapshot_market,
+    snapshot_news,
+)
 
 settings = get_settings()
+logger = get_logger(__name__)
+
+NEUTRAL_FUNDAMENTALS = {
+    "fundamental_score": 5.0,
+    "earnings_trend": "neutral",
+    "revenue_growth": "unavailable",
+    "guidance": "unavailable",
+    "available": False,
+}
 
 
 def _flatten_hist(hist):
@@ -14,10 +30,26 @@ def _flatten_hist(hist):
     return hist
 
 
+def _cached_market(ticker: str) -> dict:
+    cached = snapshot_market(ticker)
+    if not cached:
+        raise ValueError(
+            f"No price history available for {ticker}. Yahoo Finance is rate limiting this "
+            "host and no cached snapshot exists for the symbol."
+        )
+    logger.warning("market_data_from_snapshot", ticker=ticker, as_of=snapshot_date())
+    return {**cached, "cached_as_of": snapshot_date()}
+
+
 def fetch_market_data(ticker: str) -> dict:
-    hist = _flatten_hist(yf.download(ticker, period="1mo", progress=False))
+    try:
+        hist = _flatten_hist(yf.download(ticker, period="1mo", progress=False))
+    except Exception as exc:
+        logger.warning("market_fetch_failed", ticker=ticker, error=str(exc))
+        return _cached_market(ticker)
+
     if hist.empty:
-        raise ValueError(f"No market data for {ticker}")
+        return _cached_market(ticker)
 
     first_close = float(hist["Close"].iloc[0])
     last_close = float(hist["Close"].iloc[-1])
@@ -43,15 +75,44 @@ def fetch_news_signals(ticker: str, news_query: str | None = None) -> tuple[list
     if not settings.enable_live_data:
         return [], []
     positive, negative = fetch_live_news(ticker, news_query=news_query)
-    if not positive and not negative:
-        raise ValueError(f"No news found for {ticker}")
-    return positive, negative
+    if positive or negative:
+        return positive, negative
+
+    cached = snapshot_news(ticker)
+    if not cached:
+        logger.warning("no_news_signals", ticker=ticker)
+        return [], []
+
+    as_of = snapshot_date()
+    logger.warning("news_from_snapshot", ticker=ticker, as_of=as_of)
+    for signal in cached:
+        signal.source = f"{signal.source} (cached {as_of})"
+    return (
+        [signal for signal in cached if signal.sentiment == "positive"][:5],
+        [signal for signal in cached if signal.sentiment == "negative"][:5],
+    )
 
 
 def fetch_fundamentals(ticker: str) -> dict:
-    info = yf.Ticker(ticker).info or {}
+    # Yahoo's quoteSummary endpoint shares the rate-limited crumb handshake, so a
+    # failure here falls back to the cached snapshot before going neutral.
+    try:
+        info = yf.Ticker(ticker).info or {}
+    except Exception as exc:
+        logger.warning("fundamentals_fetch_failed", ticker=ticker, error=str(exc))
+        info = {}
+
+    source = "live"
     if not info:
-        raise ValueError(f"No fundamentals for {ticker}")
+        info = snapshot_fundamentals(ticker) or {}
+        source = "snapshot"
+
+    if not info:
+        logger.warning("fundamentals_unavailable", ticker=ticker)
+        return dict(NEUTRAL_FUNDAMENTALS)
+
+    if source == "snapshot":
+        logger.warning("fundamentals_from_snapshot", ticker=ticker, as_of=snapshot_date())
 
     revenue_growth = info.get("revenueGrowth")
     profit_margin = info.get("profitMargins")
@@ -80,4 +141,6 @@ def fetch_fundamentals(ticker: str) -> dict:
         "earnings_trend": earnings_trend,
         "revenue_growth": revenue_label,
         "guidance": guidance,
+        "available": True,
+        "cached_as_of": snapshot_date() if source == "snapshot" else None,
     }
