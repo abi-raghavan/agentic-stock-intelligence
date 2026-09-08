@@ -1,7 +1,7 @@
 # Agentic Stock Intelligence
 
 Multi-agent stock intelligence for Indian (NSE/BSE) and US markets. Live news and market data. **Not financial advice.**
-
+Live Demo: https://agentic-stock-intelligence.vercel.app/
 **Stack:** Next.js · FastAPI · LangGraph · BM25 RAG · SQLite
 
 ## Run locally (no Docker)
