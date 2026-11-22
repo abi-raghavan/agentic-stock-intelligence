@@ -35,6 +35,8 @@ class PlannerOutput(BaseModel):
     ticker: str
     intent: str
     tasks: list[str]
+    focus_queries: list[str] = Field(default_factory=list)
+    llm_used: bool = False
 
 
 class NewsSignal(BaseModel):

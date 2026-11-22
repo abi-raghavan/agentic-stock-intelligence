@@ -1,6 +1,8 @@
 import hashlib
 import json
+import math
 import re
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -16,6 +18,20 @@ settings = get_settings()
 
 def tokenize(text: str) -> list[str]:
     return re.findall(r"[a-z0-9]+", text.lower())
+
+
+def _cosine(a: dict[str, float], b: dict[str, float]) -> float:
+    if not a or not b:
+        return 0.0
+    shared = set(a) & set(b)
+    if not shared:
+        return 0.0
+    dot = sum(a[t] * b[t] for t in shared)
+    na = math.sqrt(sum(v * v for v in a.values()))
+    nb = math.sqrt(sum(v * v for v in b.values()))
+    if na == 0.0 or nb == 0.0:
+        return 0.0
+    return dot / (na * nb)
 
 
 def make_doc_id(ticker: str, source: str, idx: int) -> str:
@@ -150,7 +166,7 @@ class BM25Index:
     def build(self, records: list[DocumentRecord]) -> None:
         self.records = records
         corpus = [tokenize(f"{r.title} {r.content}") for r in records]
-        self.index = BM25Okapi(corpus)
+        self.index = BM25Okapi(corpus) if corpus else None
 
     def search(
         self,
@@ -183,6 +199,74 @@ class BM25Index:
             )
             if len(results) >= limit:
                 break
+        return results
+
+
+class TfidfIndex:
+    """In-process sparse TF-IDF vector channel — free, fast, no model download."""
+
+    def __init__(self) -> None:
+        self.records: list[DocumentRecord] = []
+        self.doc_vectors: list[dict[str, float]] = []
+        self.idf: dict[str, float] = {}
+
+    def build(self, records: list[DocumentRecord]) -> None:
+        self.records = records
+        tokenized = [tokenize(f"{r.title} {r.content}") for r in records]
+        df: Counter[str] = Counter()
+        for tokens in tokenized:
+            df.update(set(tokens))
+        n_docs = max(len(tokenized), 1)
+        self.idf = {term: math.log((1 + n_docs) / (1 + count)) + 1.0 for term, count in df.items()}
+        self.doc_vectors = []
+        for tokens in tokenized:
+            tf = Counter(tokens)
+            length = max(len(tokens), 1)
+            vector = {term: (count / length) * self.idf.get(term, 0.0) for term, count in tf.items()}
+            self.doc_vectors.append(vector)
+
+    def _query_vector(self, query: str) -> dict[str, float]:
+        tokens = tokenize(query)
+        if not tokens:
+            return {}
+        tf = Counter(tokens)
+        length = max(len(tokens), 1)
+        return {term: (count / length) * self.idf.get(term, 0.0) for term, count in tf.items()}
+
+    def search(
+        self,
+        query: str,
+        ticker: str | None = None,
+        source_type: str | None = None,
+        limit: int = 10,
+    ) -> list[dict[str, Any]]:
+        if not self.records or not self.doc_vectors:
+            return []
+        qvec = self._query_vector(query)
+        scored: list[tuple[float, int]] = []
+        for idx, record in enumerate(self.records):
+            if ticker and record.ticker.upper() != ticker.upper():
+                continue
+            if source_type and record.source_type != source_type:
+                continue
+            score = _cosine(qvec, self.doc_vectors[idx])
+            if score > 0:
+                scored.append((score, idx))
+        scored.sort(key=lambda x: x[0], reverse=True)
+        results = []
+        for score, idx in scored[:limit]:
+            record = self.records[idx]
+            results.append(
+                {
+                    "doc_id": record.doc_id,
+                    "source": record.source,
+                    "source_type": record.source_type,
+                    "document_date": record.document_date,
+                    "snippet": record.content[:500],
+                    "title": record.title,
+                    "vector_score": float(score),
+                }
+            )
         return results
 
 
@@ -230,7 +314,13 @@ class HybridRetriever:
     def __init__(self) -> None:
         self.qdrant = QdrantStore()
         self.bm25 = BM25Index()
+        self.tfidf = TfidfIndex()
         self.records: list[DocumentRecord] = []
+
+    def _rebuild_indexes(self) -> None:
+        self.bm25.build(self.records)
+        if settings.enable_hybrid_tfidf:
+            self.tfidf.build(self.records)
 
     def load_bm25_only(self, data_dir: str | Path) -> int:
         path = Path(data_dir)
@@ -251,8 +341,8 @@ class HybridRetriever:
                     )
                 )
         self.records = records
-        self.bm25.build(records)
-        logger.info("bm25_sample_data_loaded", count=len(records))
+        self._rebuild_indexes()
+        logger.info("hybrid_sample_data_loaded", count=len(records), tfidf=settings.enable_hybrid_tfidf)
         return len(records)
 
     def ingest_runtime_documents(self, ticker: str, documents: list[dict[str, str]]) -> int:
@@ -274,7 +364,7 @@ class HybridRetriever:
             for idx, doc in enumerate(documents)
         ]
         self.records = base_records + live_records
-        self.bm25.build(self.records)
+        self._rebuild_indexes()
         self.qdrant.upsert_documents(live_records)
         return len(live_records)
 
@@ -287,9 +377,19 @@ class HybridRetriever:
     ) -> tuple[str, list[dict[str, Any]]]:
         rewritten = rewrite_query(query, ticker)
         bm25_results = self.bm25.search(rewritten, ticker=ticker, source_type=source_type, limit=limit)
-        vector_results = self.qdrant.vector_search(rewritten, ticker=ticker, source_type=source_type, limit=limit)
-        if vector_results:
-            fused = reciprocal_rank_fusion([bm25_results, vector_results], score_key="bm25_score")[:limit]
+
+        vector_channels: list[list[dict[str, Any]]] = []
+        if settings.enable_hybrid_tfidf:
+            tfidf_results = self.tfidf.search(rewritten, ticker=ticker, source_type=source_type, limit=limit)
+            if tfidf_results:
+                vector_channels.append(tfidf_results)
+
+        qdrant_results = self.qdrant.vector_search(rewritten, ticker=ticker, source_type=source_type, limit=limit)
+        if qdrant_results:
+            vector_channels.append(qdrant_results)
+
+        if vector_channels:
+            fused = reciprocal_rank_fusion([bm25_results, *vector_channels], score_key="bm25_score")[:limit]
         else:
             fused = [{**item, "fused_score": item.get("bm25_score", 0.0)} for item in bm25_results[:limit]]
         return rewritten, assign_citation_ids(fused)

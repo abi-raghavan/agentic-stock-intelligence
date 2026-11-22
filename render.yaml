@@ -9,10 +9,16 @@ services:
         value: .
       - key: ENABLE_LIVE_DATA
         value: "true"
+      - key: ENABLE_HYBRID_TFIDF
+        value: "true"
       - key: ENABLE_QDRANT
         value: "false"
       - key: ENABLE_OLLAMA
         value: "false"
+      - key: GROQ_MODEL
+        value: qwen/qwen3.8-27b
+      - key: GROQ_API_KEY
+        sync: false
       - key: SEED_DATA_ON_STARTUP
         value: "true"
       - key: SAMPLE_DATA_DIR

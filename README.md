@@ -3,7 +3,16 @@
 Multi-agent stock intelligence for Indian (NSE/BSE) and US markets. Live news and market data. **Not financial advice.**
 
 Live Demo: https://agentic-stock-intelligence.vercel.app/
-**Stack:** Next.js · FastAPI · LangGraph · BM25 RAG · SQLite
+**Stack:** Next.js · FastAPI · LangGraph · Hybrid BM25+TF-IDF RAG · Groq (free LLM) · SQLite
+
+## What it does
+
+LangGraph pipeline: **planner → research → RAG evidence → risk → report verification**.
+
+- Planner tasks and focus queries drive research + retrieval (not cosmetic)
+- Hybrid RAG: BM25 + lightweight TF-IDF fused with RRF; citation IDs on every hit
+- Free LLM via [Groq](https://console.groq.com/keys) (`qwen/qwen3.8-27b`) for plan, risk narrative, report, and groundedness checks
+- Heuristic fallbacks when no API key — demos and tests still work offline
 
 ## Run locally (no Docker)
 
@@ -12,6 +21,9 @@ Python 3.12 and Node 20 required.
 ```bash
 git clone https://github.com/abi-raghavan/agentic-stock-intelligence.git
 cd agentic-stock-intelligence
+cp .env.local.example .env
+# optional but recommended — free key: https://console.groq.com/keys
+# GROQ_API_KEY=gsk_...
 make local-setup
 make local-api   # terminal 1
 make local-web   # terminal 2
@@ -47,13 +59,18 @@ Do this in order: **API first, then frontend.**
 ```
 PYTHONPATH=.
 ENABLE_LIVE_DATA=true
+ENABLE_HYBRID_TFIDF=true
 ENABLE_QDRANT=false
 ENABLE_OLLAMA=false
+GROQ_MODEL=qwen/qwen3.8-27b
+GROQ_API_KEY=<your free Groq key>
 SEED_DATA_ON_STARTUP=true
 SAMPLE_DATA_DIR=sample_data
 DATABASE_URL=sqlite:////tmp/stock_intel.db
 CORS_ORIGINS=http://localhost:3000
 ```
+
+Get a free Groq key at https://console.groq.com/keys (no paid plan required).
 
 6. Click **Deploy**. Wait until it is Live.
 7. Copy the URL, e.g. `https://agentic-stock-api.onrender.com`.

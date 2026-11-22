@@ -43,29 +43,39 @@ class StockIntelligenceGraph:
                 }
             )
             planner = await run_planner(state["ticker"], state["query"])
+            plan_msg = (
+                f"Plan ready via LLM ({len(planner.tasks)} tasks)"
+                if planner.llm_used
+                else f"Plan ready ({len(planner.tasks)} tasks)"
+            )
             await self._emit(
                 {
                     "run_id": state["run_id"],
                     "step": "planning",
                     "status": "completed",
-                    "message": "Investigation plan ready",
+                    "message": plan_msg,
                 }
             )
             return {"planner": planner}
 
         async def research_node(state: GraphState) -> GraphState:
+            planner = state.get("planner")
+            focus_hint = ""
+            if planner and planner.focus_queries:
+                focus_hint = f" (focus: {planner.focus_queries[0][:80]})"
             await self._emit(
                 {
                     "run_id": state["run_id"],
                     "step": "research",
                     "status": "started",
-                    "message": "Collecting news, market, and fundamentals",
+                    "message": f"Collecting news, market, and fundamentals{focus_hint}",
                 }
             )
             research, chart = await run_research(
                 state["ticker"],
                 display_name=state.get("display_name"),
                 news_query=state.get("news_query"),
+                planner=planner,
             )
             await self._emit(
                 {
@@ -90,7 +100,12 @@ class StockIntelligenceGraph:
                 signals = state["research"].positive_signals + state["research"].negative_signals
                 live_docs = news_to_rag_documents(signals)
                 self.retriever.ingest_runtime_documents(state["ticker"], live_docs)
-            rag = await run_rag(self.retriever, state["query"], state["ticker"])
+            rag = await run_rag(
+                self.retriever,
+                state["query"],
+                state["ticker"],
+                planner=state.get("planner"),
+            )
             await self._emit(
                 {
                     "run_id": state["run_id"],
@@ -142,7 +157,12 @@ class StockIntelligenceGraph:
             retry = False
             if not report.verification_passed and not state.get("retry_rag"):
                 retry = True
-                rag = await run_rag(self.retriever, f"{state['query']} evidence support", state["ticker"])
+                rag = await run_rag(
+                    self.retriever,
+                    f"{state['query']} evidence support",
+                    state["ticker"],
+                    planner=state.get("planner"),
+                )
                 report = await run_report_verify(
                     ticker=state["ticker"],
                     query=state["query"],

@@ -1,10 +1,5 @@
-import json
-
-from src.config import get_settings
 from src.models.schemas import PlannerOutput
-from src.tools.llm import call_ollama, parse_json_response
-
-settings = get_settings()
+from src.tools.llm import call_llm, llm_available, parse_json_response
 
 DEFAULT_TASKS = [
     "Collect company news",
@@ -16,18 +11,51 @@ DEFAULT_TASKS = [
 ]
 
 
+def _default_focus(ticker: str, query: str) -> list[str]:
+    return [
+        f"{ticker} {query}",
+        f"{ticker} risks earnings valuation news",
+        f"{ticker} growth outlook catalysts",
+    ]
+
+
 async def run_planner(ticker: str, query: str) -> PlannerOutput:
-    if not settings.enable_ollama:
-        return PlannerOutput(ticker=ticker.upper(), intent=query, tasks=DEFAULT_TASKS)
+    ticker = ticker.upper()
+    if not llm_available():
+        return PlannerOutput(
+            ticker=ticker,
+            intent=query,
+            tasks=DEFAULT_TASKS,
+            focus_queries=_default_focus(ticker, query),
+            llm_used=False,
+        )
 
     prompt = (
-        f"Create an investigation plan for stock ticker {ticker.upper()} and user query: {query}. "
-        "Return JSON with keys: ticker, intent, tasks (array of strings)."
+        f"Create a short investigation plan for equity ticker {ticker}.\n"
+        f"User question: {query}\n\n"
+        "Return JSON with keys:\n"
+        "- intent (string, restated research goal)\n"
+        "- tasks (array of 4-6 short investigation steps)\n"
+        "- focus_queries (array of 2-3 search queries for news/RAG, include ticker)\n"
     )
-    content = await call_ollama(prompt, system="You are a financial investigation planner. Respond with JSON only.")
+    content = await call_llm(
+        prompt,
+        system="You are a financial investigation planner. Respond with JSON only. Be concise.",
+        json_mode=True,
+        max_tokens=512,
+    )
     data = parse_json_response(content)
+    tasks = data.get("tasks") or DEFAULT_TASKS
+    if not isinstance(tasks, list) or not tasks:
+        tasks = DEFAULT_TASKS
+    focus = data.get("focus_queries") or _default_focus(ticker, query)
+    if not isinstance(focus, list) or not focus:
+        focus = _default_focus(ticker, query)
+
     return PlannerOutput(
-        ticker=ticker.upper(),
-        intent=data.get("intent", query),
-        tasks=data.get("tasks", DEFAULT_TASKS),
+        ticker=ticker,
+        intent=str(data.get("intent") or query),
+        tasks=[str(t) for t in tasks][:6],
+        focus_queries=[str(q) for q in focus][:3],
+        llm_used=bool(content),
     )

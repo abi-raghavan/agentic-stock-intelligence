@@ -1,4 +1,10 @@
-from src.rag.citations import build_sources_list, evidence_from_dict, format_citation, verify_claims
+from src.rag.citations import (
+    build_sources_list,
+    evidence_from_dict,
+    format_citation,
+    grounded_verify_claims,
+    verify_claims,
+)
 from src.rag.retriever import HybridRetriever, reciprocal_rank_fusion, rewrite_query
 
 __all__ = [
@@ -8,5 +14,6 @@ __all__ = [
     "build_sources_list",
     "evidence_from_dict",
     "format_citation",
+    "grounded_verify_claims",
     "verify_claims",
 ]

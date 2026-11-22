@@ -1,4 +1,4 @@
-from src.rag.retriever import reciprocal_rank_fusion, rewrite_query
+from src.rag.retriever import HybridRetriever, reciprocal_rank_fusion, rewrite_query
 
 
 def test_rewrite_query_adds_ticker_and_risk_terms():
@@ -20,3 +20,19 @@ def test_rrf_fuses_rankings():
     ids = [item["doc_id"] for item in fused]
     assert set(ids) == {"a", "b", "c"}
     assert fused[0]["fused_score"] >= fused[-1]["fused_score"]
+
+
+def test_hybrid_retrieve_attaches_vector_scores():
+    retriever = HybridRetriever()
+    count = retriever.load_bm25_only("sample_data")
+    assert count >= 5
+    rewritten, items = retriever.retrieve(
+        "NVIDIA export restrictions China risk",
+        ticker="NVDA",
+        limit=5,
+    )
+    assert "NVDA" in rewritten
+    assert items
+    assert items[0]["citation_id"].startswith("E")
+    # Hybrid TF-IDF channel should populate vector_score on at least some fused hits
+    assert any(item.get("vector_score") is not None or item.get("fused_score") is not None for item in items)

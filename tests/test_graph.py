@@ -5,7 +5,7 @@ from src.models.schemas import ResearchOutput
 from src.rag.retriever import HybridRetriever
 
 
-async def _fake_research(ticker, display_name=None, news_query=None):
+async def _fake_research(ticker, display_name=None, news_query=None, planner=None):
     research = ResearchOutput(
         positive_signals=[],
         negative_signals=[],

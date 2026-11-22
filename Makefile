@@ -20,7 +20,7 @@ local:
 	@echo "Then visit http://localhost:3000"
 
 test:
-	python3.12 -m pytest tests/ -q
+	. .venv/bin/activate && PYTHONPATH=. python -m pytest tests/ -q
 
 # Refresh the offline fallback snapshot. Run from a non-datacenter connection,
 # since Yahoo Finance rate limits cloud IPs.
